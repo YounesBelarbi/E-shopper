@@ -4,6 +4,80 @@
 {% endblock %}
 
 {% block body %}
-	<h1>home</h1>
-	<button type="button" class="btn btn-primary">Primary</button>
+	<!-- Carousel -->
+	<div id="top-carousel" class="carousel slide" data-bs-ride="carousel">
+		<ol class="carousel-indicators">
+			<li data-bs-target="#top-carousel" data-bs-slide-to="0" class="active"></li>
+			<li data-bs-target="#top-carousel" data-bs-slide-to="1"></li>
+			<li data-bs-target="#top-carousel" data-bs-slide-to="2"></li>
+		</ol>
+		<div class="carousel-inner">
+			<div class="carousel-item active">
+				<div class="container">
+					<div class="row p-5">
+						<div class="mx-auto col-md-8 col-lg-6 order-lg-last">
+							<img class="img-fluid" src="{{asset( 'https://picsum.photos/200/300?random=' ~ random(1, 100))}}" alt="">
+						</div>
+						<div class="col-lg-6 mb-0 d-flex align-items-center">
+							<div class="text-align-left align-self-center">
+								<h1 class="h1 text-success">
+									<b>Eshopper</b>
+									eCommerce</h1>
+								<h3 class="h2">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h3>
+								<p>
+									Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptas minima nulla quisquam aliquam magni voluptate modi ratione tenetur nemo debitis!
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="carousel-item">
+				<div class="container">
+					<div class="row p-5">
+						<div class="mx-auto col-md-8 col-lg-6 order-lg-last">
+							<img class="img-fluid" src="{{asset( 'https://picsum.photos/200/300?random=' ~ random(1, 100))}}" alt="">
+						</div>
+						<div class="col-lg-6 mb-0 d-flex align-items-center">
+							<div class="text-align-left">
+								<h1 class="h1 text-success">Lorem, ipsum.</h1>
+								<h3 class="h2">Lorem, ipsum dolor.</h3>
+								<p>
+									Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad deleniti aliquid minima exercitationem quidem. Voluptates.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="carousel-item">
+				<div class="container">
+					<div class="row p-5">
+						<div class="mx-auto col-md-8 col-lg-6 order-lg-last">
+							<img class="img-fluid" src="{{asset( 'https://picsum.photos/200/300?random=' ~ random(1, 100))}}" alt="">
+						</div>
+						<div class="col-lg-6 mb-0 d-flex align-items-center">
+							<div class="text-align-left">
+								<h1 class="h1 text-success">Lorem, ipsum dolor.</h1>
+								<h3 class="h2">Lorem, ipsum dolor.
+								</h3>
+								<p>
+									Lorem ipsum dolor, sit amet consectetur adipisicing elit. Delectus sed, voluptas dolor impedit ab numquam quasi id inventore eos ipsa autem assumenda odit minus quam?
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<a class="carousel-control-prev text-decoration-none w-auto ps-3" href="#top-carousel" role="button" data-bs-slide="prev">
+			<i class="fas fa-chevron-left"></i>
+		</a>
+		<a class="carousel-control-next text-decoration-none w-auto pe-3" href="#top-carousel" role="button" data-bs-slide="next">
+			<i class="fas fa-chevron-right"></i>
+		</a>
+
+	</div>
+	<!-- Carousel -->
+
 {% endblock %}

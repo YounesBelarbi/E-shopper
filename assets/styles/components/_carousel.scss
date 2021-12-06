@@ -1,0 +1,21 @@
+#top-carousel { 
+
+    background: #efefef !important;
+
+    & .carousel-indicators li {
+        margin-top: -50px;
+        background-color: #59ab6e;
+    }
+
+    & .carousel-control-next i,
+    & .carousel-control-prev i {
+        color: #59ab6e !important;
+        font-size: 2.8em !important;
+    }
+}
+
+@media (min-width: 992px) {
+    #top-carousel .carousel-item {
+        min-height: 30rem !important;
+    }
+}
