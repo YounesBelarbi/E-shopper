@@ -1,3 +1,28 @@
-@import "custom";
 @import "~bootstrap/scss/bootstrap";
+@import '~@fortawesome/fontawesome-free/css/all.css';
+
+@import "custom";
+
+@import 'components/carousel';
+
+@import 'layout/navigation';
+@import 'layout/footer';
+
+
+@import 'pages/home';
+
+@import 'base/typography';
+
+
+
+
+
+
+
+
+
+
+
+
+
 

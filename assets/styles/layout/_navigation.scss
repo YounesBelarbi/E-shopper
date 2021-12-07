@@ -1,0 +1,41 @@
+/* Nav */
+#nav_top { 
+    min-height: 40px;
+
+    & * { 
+        font-size: .9em !important;
+    }
+}
+
+#main_nav {
+    & a { 
+        color: #212934;
+    }
+    
+    & a:hover { 
+        color: #69bb7e;
+    }
+
+    & .navbar .nav-icon { 
+        margin-right: 20px;
+    }
+
+}
+
+/*// Medium devices (tablets, 768px and up)*/
+@media (min-width: 768px) {
+    #main_nav {
+        & .navbar-nav {
+            max-width: 450px;
+        }
+    }
+}
+
+/* Large devices (desktops, 992px and up)*/
+@media (min-width: 992px) {
+    #main_nav {
+        & .navbar-nav {
+            max-width: 550px;
+        }
+    } 
+}
