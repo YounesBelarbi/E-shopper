@@ -60,11 +60,23 @@
 					<div class="flex-fill">
 						<ul class="nav navbar-nav d-flex justify-content-center mx-lg-auto">
 							<li class="nav-item">
-								<a class="nav-link" href="index.html">Accueil</a>
+								<a class="nav-link" href="{{ path('home') }}">Accueil</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" href="contact.html">Contact</a>
 							</li>
+							{% if app.user is not null %}
+								<li class="nav-item">
+									<a class="nav-link" href="{{ path('app_logout') }}">deconnexion</a>
+								</li>
+							{% else %}
+								<li class="nav-item">
+									<a class="nav-link" href="{{ path('app_login') }}">connexion</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="{{ path('app_register') }}">inscription</a>
+								</li>
+							{% endif %}
 						</ul>
 					</div>
 					<div class="navbar align-self-center d-flex">
