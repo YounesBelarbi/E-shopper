@@ -1,0 +1,12 @@
+reset_password_message_verify_email: "Si un compte correspondant à votre adresse e-mail existe, alors un e-mail vient d'être envoyé contenant un lien que vous pouvez utiliser pour réinitialiser votre mot de passe.
+Ce lien expirera dans"
+
+user_not_receive_email: "Si vous ne recevez pas d'e-mail, vérifiez votre dossier de courrier indésirable (spam) ou votre adresse e-mail."
+
+try_again: "essayez à nouveau"
+
+message_reset_password_form: "Saisissez votre adresse mail et nous vous enverrons un lien pour réinitialiser votre mot de passe."
+
+
+
+
