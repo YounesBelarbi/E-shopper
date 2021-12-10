@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+	<p>
+		{{ 'reset_password_message_verify_email'|trans }}{{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
+	</p>
+	<p>{{ 'user_not_receive_email'|trans }}
+		<a href="{{ path('app_forgot_password_request') }}">{{ 'try_again'|trans }}</a>.
+	</p>
+{% endblock %}

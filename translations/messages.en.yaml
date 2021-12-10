@@ -1,0 +1,9 @@
+reset_password_message_verify_email: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password.
+This link will expire in"
+
+user_not_receive_email: "If you don't receive an email please check your spam folder or"
+
+try_again: "try again"
+
+message_reset_password_form: "Enter your email address and we will send you a link to reset your password."
+
