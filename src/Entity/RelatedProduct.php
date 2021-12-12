@@ -22,6 +22,12 @@ class RelatedProduct
      */
     private $relatedTo;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Product::class, inversedBy="relatedProduct")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $product;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -35,6 +41,18 @@ class RelatedProduct
     public function setRelatedTo(int $relatedTo): self
     {
         $this->relatedTo = $relatedTo;
+
+        return $this;
+    }
+
+    public function getProduct(): ?Product
+    {
+        return $this->product;
+    }
+
+    public function setProduct(?Product $product): self
+    {
+        $this->product = $product;
 
         return $this;
     }

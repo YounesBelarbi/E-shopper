@@ -47,6 +47,12 @@ class OrderDetails
      */
     private $subtotalTTC;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Orders::class, inversedBy="orderDetails")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $relatedOrder;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -120,6 +126,18 @@ class OrderDetails
     public function setSubtotalTTC(float $subtotalTTC): self
     {
         $this->subtotalTTC = $subtotalTTC;
+
+        return $this;
+    }
+
+    public function getRelatedOrder(): ?Orders
+    {
+        return $this->relatedOrder;
+    }
+
+    public function setRelatedOrder(?Orders $relatedOrder): self
+    {
+        $this->relatedOrder = $relatedOrder;
 
         return $this;
     }

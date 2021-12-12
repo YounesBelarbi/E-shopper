@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProductRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -61,6 +63,34 @@ class Product
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $isSpecialOffer;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Categories::class, inversedBy="products")
+     */
+    private $categories;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Tags::class, inversedBy="products")
+     */
+    private $tags;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Reviews::class, mappedBy="product")
+     */
+    private $reviews;
+
+    /**
+     * @ORM\OneToMany(targetEntity=RelatedProduct::class, mappedBy="product", orphanRemoval=true)
+     */
+    private $relatedProduct;
+
+    public function __construct()
+    {
+        $this->categories = new ArrayCollection();
+        $this->tags = new ArrayCollection();
+        $this->reviews = new ArrayCollection();
+        $this->relatedProduct = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -171,6 +201,114 @@ class Product
     public function setIsSpecialOffer(?bool $isSpecialOffer): self
     {
         $this->isSpecialOffer = $isSpecialOffer;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Categories[]
+     */
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function addCategory(Categories $category): self
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories[] = $category;
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Categories $category): self
+    {
+        $this->categories->removeElement($category);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Tags[]
+     */
+    public function getTags(): Collection
+    {
+        return $this->tags;
+    }
+
+    public function addTag(Tags $tag): self
+    {
+        if (!$this->tags->contains($tag)) {
+            $this->tags[] = $tag;
+        }
+
+        return $this;
+    }
+
+    public function removeTag(Tags $tag): self
+    {
+        $this->tags->removeElement($tag);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Reviews[]
+     */
+    public function getReviews(): Collection
+    {
+        return $this->reviews;
+    }
+
+    public function addReview(Reviews $review): self
+    {
+        if (!$this->reviews->contains($review)) {
+            $this->reviews[] = $review;
+            $review->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReview(Reviews $review): self
+    {
+        if ($this->reviews->removeElement($review)) {
+            // set the owning side to null (unless already changed)
+            if ($review->getProduct() === $this) {
+                $review->setProduct(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|RelatedProduct[]
+     */
+    public function getRelatedProduct(): Collection
+    {
+        return $this->relatedProduct;
+    }
+
+    public function addRelatedProduct(RelatedProduct $relatedProduct): self
+    {
+        if (!$this->relatedProduct->contains($relatedProduct)) {
+            $this->relatedProduct[] = $relatedProduct;
+            $relatedProduct->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRelatedProduct(RelatedProduct $relatedProduct): self
+    {
+        if ($this->relatedProduct->removeElement($relatedProduct)) {
+            // set the owning side to null (unless already changed)
+            if ($relatedProduct->getProduct() === $this) {
+                $relatedProduct->setProduct(null);
+            }
+        }
 
         return $this;
     }
