@@ -1,0 +1,17 @@
+App\Entity\Carrier:
+    carrier{1..4}:
+        name: '<fr_FR:company()>'
+        description: '<fr_FR:realText()>'
+        createdAt: '<date_create()>'
+        price: '<randomFloat(0, 1, 5)>'
+
+
+App\Entity\User:
+    user{1..20}:
+        firstname: '<fr_FR:lastName()>'
+        lastname: '<fr_FR:lastName()>'
+        email (unique): '<fr_FR:email()>'
+        password: '\$2y\$13\$zkjknZ23ttDFq9F0raHoeOim/M/If3hb67VqGwigiXymIbVDZKDIC' #password
+        roles: '<roles()>'
+        createdAt: '<date_create()>'
+        isVerified: '<boolean()>'
