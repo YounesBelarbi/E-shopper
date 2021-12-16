@@ -42,8 +42,6 @@ App\Entity\Categories:
         name: '<fr_FR:word()>'
         image: '<imageUrl(640, 480)>'
 
-
-
 App\Entity\Orders:
     orders{1..25}:
         reference: '<ean8()>'
@@ -55,7 +53,6 @@ App\Entity\Orders:
         createdAt: '<date_create()>'
         user: '@user*'
 
-
 App\Entity\OrderDetails:
     orderDetails{1..45}:
         productName: '<fr_FR:word()>'
@@ -65,3 +62,16 @@ App\Entity\OrderDetails:
         subtotalTTC: '<randomFloat(2, 200, 500)>'
         taxe: '<randomDigit()>'
         relatedOrder: '@orders*'
+
+App\Entity\Tags:
+    tags{1..10}:
+        name: '<fr_FR:word()>'
+        products: '5x @product*'
+
+App\Entity\Reviews:
+    reviews{1..25}:
+        note: '<numberBetween(0, 6)>'
+        comment: '<fr_FR:realText()>'
+        user: '@user*'
+        product: '@product*'
+        createdAt: '<date_create()>'
