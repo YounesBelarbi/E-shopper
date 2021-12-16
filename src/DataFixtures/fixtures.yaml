@@ -1,0 +1,77 @@
+App\Entity\Carrier:
+    carrier{1..4}:
+        name: '<fr_FR:company()>'
+        description: '<fr_FR:realText()>'
+        createdAt: '<date_create()>'
+        price: '<randomFloat(0, 1, 5)>'
+
+App\Entity\User:
+    user{1..20}:
+        firstname: '<fr_FR:lastName()>'
+        lastname: '<fr_FR:lastName()>'
+        email (unique): '<fr_FR:email()>'
+        password: '\$2y\$13\$zkjknZ23ttDFq9F0raHoeOim/M/If3hb67VqGwigiXymIbVDZKDIC' #password
+        roles: '<roles()>'
+        createdAt: '<date_create()>'
+        isVerified: '<boolean()>'
+
+App\Entity\Address:
+    address{1..30}:
+        address: '<fr_FR:address()>'
+        city: '<fr_FR:city()>'
+        postal: '<fr_FR:postcode()>'
+        phone: '<fr_FR:phoneNumber()>'
+        user: '@user*'
+
+App\Entity\Product:
+    product{1..5}:
+        name: '<fr_FR:word()>'
+        description: '<fr_FR:text()>'
+        complement: '<fr_FR:postcode()>'
+        price: '<randomFloat(2, 5, 150)>'
+        image: '<imageUrl(640, 480)>'
+        categories: '3x @categories*'
+        relatedProducts: '3x @product*'
+        isBest: '<boolean()>'
+        isNewArrival: '<boolean()>'
+        isFeatured: '<boolean()>'
+        isSpecialOffer: '<boolean()>'
+
+App\Entity\Categories:
+    categories{1..10}:
+        name: '<fr_FR:word()>'
+        image: '<imageUrl(640, 480)>'
+
+App\Entity\Orders:
+    orders{1..25}:
+        reference: '<ean8()>'
+        name: '<fr_FR:word()>'
+        isPaid: '<boolean()>'
+        complement: '<fr_FR:text()>'
+        carrierName: '<fr_FR:word()>'
+        carrierPrice: '<randomFloat(0, 5, 10)>'
+        createdAt: '<date_create()>'
+        user: '@user*'
+
+App\Entity\OrderDetails:
+    orderDetails{1..45}:
+        productName: '<fr_FR:word()>'
+        productPrice: '<randomFloat(2, 5, 150)>'
+        quantity: '<randomDigit()>'
+        subtotalHT: '<randomFloat(2, 100, 250)>'
+        subtotalTTC: '<randomFloat(2, 200, 500)>'
+        taxe: '<randomDigit()>'
+        relatedOrder: '@orders*'
+
+App\Entity\Tags:
+    tags{1..10}:
+        name: '<fr_FR:word()>'
+        products: '5x @product*'
+
+App\Entity\Reviews:
+    reviews{1..25}:
+        note: '<numberBetween(0, 6)>'
+        comment: '<fr_FR:realText()>'
+        user: '@user*'
+        product: '@product*'
+        createdAt: '<date_create()>'

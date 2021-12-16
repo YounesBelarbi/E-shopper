@@ -18,11 +18,6 @@ class Reviews
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $note;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $comment;
@@ -39,21 +34,19 @@ class Reviews
      */
     private $product;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $note;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $CreatedAt;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getNote(): ?string
-    {
-        return $this->note;
-    }
-
-    public function setNote(string $note): self
-    {
-        $this->note = $note;
-
-        return $this;
     }
 
     public function getComment(): ?string
@@ -88,6 +81,30 @@ class Reviews
     public function setProduct(?Product $product): self
     {
         $this->product = $product;
+
+        return $this;
+    }
+
+    public function getNote(): ?int
+    {
+        return $this->note;
+    }
+
+    public function setNote(int $note): self
+    {
+        $this->note = $note;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->CreatedAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $CreatedAt): self
+    {
+        $this->CreatedAt = $CreatedAt;
 
         return $this;
     }
