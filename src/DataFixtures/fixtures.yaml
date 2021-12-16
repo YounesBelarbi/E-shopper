@@ -53,8 +53,8 @@ App\Entity\Orders:
         createdAt: '<date_create()>'
         user: '@user*'
 
-App\Entity\OrderDetails:
-    orderDetails{1..45}:
+App\Entity\OrderItem:
+    orderItem{1..45}:
         productName: '<fr_FR:word()>'
         productPrice: '<randomFloat(2, 5, 150)>'
         quantity: '<randomDigit()>'

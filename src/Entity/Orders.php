@@ -61,13 +61,13 @@ class Orders
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity=OrderDetails::class, mappedBy="relatedOrder")
+     * @ORM\OneToMany(targetEntity=OrderItem::class, mappedBy="relatedOrder")
      */
-    private $orderDetails;
+    private $orderItem;
 
     public function __construct()
     {
-        $this->orderDetails = new ArrayCollection();
+        $this->orderItem = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -172,29 +172,29 @@ class Orders
     }
 
     /**
-     * @return Collection|OrderDetails[]
+     * @return Collection|orderItem[]
      */
-    public function getOrderDetails(): Collection
+    public function getOrderItem(): Collection
     {
-        return $this->orderDetails;
+        return $this->orderItem;
     }
 
-    public function addOrderDetail(OrderDetails $orderDetail): self
+    public function addOrderItem(orderItem $orderItem): self
     {
-        if (!$this->orderDetails->contains($orderDetail)) {
-            $this->orderDetails[] = $orderDetail;
-            $orderDetail->setRelatedOrder($this);
+        if (!$this->orderItem->contains($orderItem)) {
+            $this->orderItem[] = $orderItem;
+            $orderItem->setRelatedOrder($this);
         }
 
         return $this;
     }
 
-    public function removeOrderDetail(OrderDetails $orderDetail): self
+    public function removeOrderItem(orderItem $orderItem): self
     {
-        if ($this->orderDetails->removeElement($orderDetail)) {
+        if ($this->orderItem->removeElement($orderItem)) {
             // set the owning side to null (unless already changed)
-            if ($orderDetail->getRelatedOrder() === $this) {
-                $orderDetail->setRelatedOrder(null);
+            if ($orderItem->getRelatedOrder() === $this) {
+                $orderItem->setRelatedOrder(null);
             }
         }
 

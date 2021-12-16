@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\OrderDetailsRepository;
+use App\Repository\orderItemRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=OrderDetailsRepository::class)
+ * @ORM\Entity(repositoryClass=orderItemRepository::class)
  */
-class OrderDetails
+class orderItem
 {
     /**
      * @ORM\Id
@@ -48,7 +48,7 @@ class OrderDetails
     private $subtotalTTC;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Orders::class, inversedBy="orderDetails")
+     * @ORM\ManyToOne(targetEntity=Orders::class, inversedBy="orderItem")
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $relatedOrder;
