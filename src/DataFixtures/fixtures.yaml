@@ -24,14 +24,14 @@ App\Entity\Address:
         user: '@user*'
 
 App\Entity\Product:
-    product{1..25}:
+    product{1..5}:
         name: '<fr_FR:word()>'
         description: '<fr_FR:text()>'
         complement: '<fr_FR:postcode()>'
         price: '<randomFloat(2, 5, 150)>'
         image: '<imageUrl(640, 480)>'
         categories: '3x @categories*'
-        relatedProductParent: '@product*'
+        relatedProducts: '3x @product*'
         isBest: '<boolean()>'
         isNewArrival: '<boolean()>'
         isFeatured: '<boolean()>'
@@ -41,3 +41,27 @@ App\Entity\Categories:
     categories{1..10}:
         name: '<fr_FR:word()>'
         image: '<imageUrl(640, 480)>'
+
+
+
+App\Entity\Orders:
+    orders{1..25}:
+        reference: '<ean8()>'
+        name: '<fr_FR:word()>'
+        isPaid: '<boolean()>'
+        complement: '<fr_FR:text()>'
+        carrierName: '<fr_FR:word()>'
+        carrierPrice: '<randomFloat(0, 5, 10)>'
+        createdAt: '<date_create()>'
+        user: '@user*'
+
+
+App\Entity\OrderDetails:
+    orderDetails{1..45}:
+        productName: '<fr_FR:word()>'
+        productPrice: '<randomFloat(2, 5, 150)>'
+        quantity: '<randomDigit()>'
+        subtotalHT: '<randomFloat(2, 100, 250)>'
+        subtotalTTC: '<randomFloat(2, 200, 500)>'
+        taxe: '<randomDigit()>'
+        relatedOrder: '@orders*'
