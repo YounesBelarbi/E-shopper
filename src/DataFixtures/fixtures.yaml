@@ -72,6 +72,6 @@ App\Entity\Reviews:
     reviews{1..25}:
         note: '<numberBetween(0, 6)>'
         comment: '<fr_FR:realText()>'
-        user: '@user*'
+        author: '@user*'
         product: '@product*'
         createdAt: '<date_create()>'

@@ -70,7 +70,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $orders;
 
     /**
-     * @ORM\OneToMany(targetEntity=Reviews::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=Reviews::class, mappedBy="author")
      */
     private $reviews;
 
@@ -290,7 +290,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->reviews->contains($review)) {
             $this->reviews[] = $review;
-            $review->setUser($this);
+            $review->setAuthor($this);
         }
 
         return $this;
@@ -300,8 +300,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if ($this->reviews->removeElement($review)) {
             // set the owning side to null (unless already changed)
-            if ($review->getUser() === $this) {
-                $review->setUser(null);
+            if ($review->getAuthor() === $this) {
+                $review->setAuthor(null);
             }
         }
 

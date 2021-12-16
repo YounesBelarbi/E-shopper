@@ -23,14 +23,8 @@ class Reviews
     private $comment;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="reviews")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $user;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Product::class, inversedBy="reviews")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $product;
 
@@ -43,6 +37,12 @@ class Reviews
      * @ORM\Column(type="datetime")
      */
     private $CreatedAt;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="reviews")
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
+     */
+    private $author;
 
     public function getId(): ?int
     {
@@ -57,18 +57,6 @@ class Reviews
     public function setComment(?string $comment): self
     {
         $this->comment = $comment;
-
-        return $this;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
 
         return $this;
     }
@@ -105,6 +93,18 @@ class Reviews
     public function setCreatedAt(\DateTimeInterface $CreatedAt): self
     {
         $this->CreatedAt = $CreatedAt;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }

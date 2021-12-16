@@ -49,7 +49,7 @@ class OrderDetails
 
     /**
      * @ORM\ManyToOne(targetEntity=Orders::class, inversedBy="orderDetails")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $relatedOrder;
 
