@@ -80,16 +80,21 @@ class Product
     private $reviews;
 
     /**
-     * @ORM\OneToMany(targetEntity=RelatedProduct::class, mappedBy="product", orphanRemoval=true)
+     * @ORM\ManyToOne(targetEntity=Product::class, inversedBy="relatedProductsList")
      */
-    private $relatedProduct;
+    private $relatedProductParent;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Product::class, mappedBy="relatedProductParent")
+     */
+    private $relatedProductsList;
 
     public function __construct()
     {
         $this->categories = new ArrayCollection();
         $this->tags = new ArrayCollection();
         $this->reviews = new ArrayCollection();
-        $this->relatedProduct = new ArrayCollection();
+        $this->relatedProductsList = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -283,30 +288,42 @@ class Product
         return $this;
     }
 
-    /**
-     * @return Collection|RelatedProduct[]
-     */
-    public function getRelatedProduct(): Collection
+    public function getRelatedProductParent(): ?self
     {
-        return $this->relatedProduct;
+        return $this->relatedProductParent;
     }
 
-    public function addRelatedProduct(RelatedProduct $relatedProduct): self
+    public function setRelatedProductParent(?self $relatedProductParent): self
     {
-        if (!$this->relatedProduct->contains($relatedProduct)) {
-            $this->relatedProduct[] = $relatedProduct;
-            $relatedProduct->setProduct($this);
+        $this->relatedProductParent = $relatedProductParent;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getRelatedProductsList(): Collection
+    {
+        return $this->relatedProductsList;
+    }
+
+    public function addRelatedProductsList(self $relatedProductsList): self
+    {
+        if (!$this->relatedProductsList->contains($relatedProductsList)) {
+            $this->relatedProductsList[] = $relatedProductsList;
+            $relatedProductsList->setRelatedProductParent($this);
         }
 
         return $this;
     }
 
-    public function removeRelatedProduct(RelatedProduct $relatedProduct): self
+    public function removeRelatedProductsList(self $relatedProductsList): self
     {
-        if ($this->relatedProduct->removeElement($relatedProduct)) {
+        if ($this->relatedProductsList->removeElement($relatedProductsList)) {
             // set the owning side to null (unless already changed)
-            if ($relatedProduct->getProduct() === $this) {
-                $relatedProduct->setProduct(null);
+            if ($relatedProductsList->getRelatedProductParent() === $this) {
+                $relatedProductsList->setRelatedProductParent(null);
             }
         }
 

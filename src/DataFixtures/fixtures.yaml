@@ -5,7 +5,6 @@ App\Entity\Carrier:
         createdAt: '<date_create()>'
         price: '<randomFloat(0, 1, 5)>'
 
-
 App\Entity\User:
     user{1..20}:
         firstname: '<fr_FR:lastName()>'
@@ -15,3 +14,30 @@ App\Entity\User:
         roles: '<roles()>'
         createdAt: '<date_create()>'
         isVerified: '<boolean()>'
+
+App\Entity\Address:
+    address{1..30}:
+        address: '<fr_FR:address()>'
+        city: '<fr_FR:city()>'
+        postal: '<fr_FR:postcode()>'
+        phone: '<fr_FR:phoneNumber()>'
+        user: '@user*'
+
+App\Entity\Product:
+    product{1..25}:
+        name: '<fr_FR:word()>'
+        description: '<fr_FR:text()>'
+        complement: '<fr_FR:postcode()>'
+        price: '<randomFloat(2, 5, 150)>'
+        image: '<imageUrl(640, 480)>'
+        categories: '3x @categories*'
+        relatedProductParent: '@product*'
+        isBest: '<boolean()>'
+        isNewArrival: '<boolean()>'
+        isFeatured: '<boolean()>'
+        isSpecialOffer: '<boolean()>'
+
+App\Entity\Categories:
+    categories{1..10}:
+        name: '<fr_FR:word()>'
+        image: '<imageUrl(640, 480)>'
