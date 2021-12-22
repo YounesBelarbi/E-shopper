@@ -113,19 +113,29 @@
 				</div>
 				<!-- col end -->
 
-
 				<div class="col-lg-7 mt-5">
 					<div class="card">
 						<div class="card-body">
-							<h1 class="h2">Lorem ipsum</h1>
-							<p class="h3 py-2">25 €</p>
+							<h1 class="h2">{{product.name}}</h1>
+							<p class="h3 py-2">{{product.price}}
+								€</p>
 							<p class="py-2">
-								<i class="fa fa-star text-warning"></i>
-								<i class="fa fa-star text-warning"></i>
-								<i class="fa fa-star text-warning"></i>
-								<i class="fa fa-star text-warning"></i>
-								<i class="fa fa-star text-secondary"></i>
-								<span class="list-inline-item text-dark">Note 4.8 | 36 Commentaires</span>
+								{% set yellowStart = product.rating %}
+								{% set greyStar = 5-product.rating %}
+
+								{% for i in 1..yellowStart %}
+									<i class="text-warning fa fa-star"></i>
+								{% endfor %}
+
+								{% if greyStar > 0 %}
+									{% for i in 1..greyStar  %}
+										<i class="text-muted fa fa-star"></i>
+									{% endfor %}
+								{% endif %}
+								<span class="list-inline-item text-dark">Note
+									{{product.rating}}|
+									{{product.reviews|length}}
+									Commentaires</span>
 							</p>
 							<ul class="list-inline">
 								<li class="list-inline-item">
@@ -168,19 +178,19 @@
 									<div class="col-auto">
 										<ul class="list-inline pb-3">
 											<li class="list-inline-item">Taille :
-												<input type="hidden" name="product-size" id="product-size" value="S">
+												<input type="hidden" name="product-option" id="product-option" value="S">
 											</li>
 											<li class="list-inline-item">
-												<span class="btn btn-success btn-size">S</span>
+												<span class="btn btn-success btn-option">S</span>
 											</li>
 											<li class="list-inline-item">
-												<span class="btn btn-success btn-size">M</span>
+												<span class="btn btn-success btn-option">M</span>
 											</li>
 											<li class="list-inline-item">
-												<span class="btn btn-success btn-size">L</span>
+												<span class="btn btn-success btn-option">L</span>
 											</li>
 											<li class="list-inline-item">
-												<span class="btn btn-success btn-size">XL</span>
+												<span class="btn btn-success btn-option">XL</span>
 											</li>
 										</ul>
 									</div>
@@ -188,16 +198,16 @@
 										<ul class="list-inline pb-3">
 											<li class="list-inline-item text-right">
 												Quantité
-												<input type="hidden" name="product-quanity" id="product-quanity" value="1">
+												<input type="hidden" name="product-quantity" id="product-quantity" value="1">
 											</li>
 											<li class="list-inline-item">
-												<span class="btn btn-success" id="btn-minus">-</span>
+												<span class="btn btn-success" id="btn-reduce">-</span>
 											</li>
 											<li class="list-inline-item">
 												<span class="badge bg-secondary" id="var-value">1</span>
 											</li>
 											<li class="list-inline-item">
-												<span class="btn btn-success" id="btn-plus">+</span>
+												<span class="btn btn-success" id="btn-add">+</span>
 											</li>
 										</ul>
 									</div>

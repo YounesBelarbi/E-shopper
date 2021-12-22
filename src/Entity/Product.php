@@ -94,6 +94,11 @@ class Product
      */
     private $orderItems;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $rating;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -372,6 +377,18 @@ class Product
                 $orderItem->setProduct(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getRating(): ?int
+    {
+        return $this->rating;
+    }
+
+    public function setRating(?int $rating): self
+    {
+        $this->rating = $rating;
 
         return $this;
     }

@@ -24,7 +24,7 @@ App\Entity\Address:
         user: '@user*'
 
 App\Entity\Product:
-    product{1..5}:
+    product{1..20}:
         name: '<fr_FR:word()>'
         description: '<fr_FR:text()>'
         complement: '<fr_FR:postcode()>'
@@ -36,6 +36,7 @@ App\Entity\Product:
         isNewArrival: '<boolean()>'
         isFeatured: '<boolean()>'
         isSpecialOffer: '<boolean()>'
+        rating: '<numberBetween(0,5)>'
 
 App\Entity\Categories:
     categories{1..10}:

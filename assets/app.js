@@ -13,3 +13,8 @@ import './bootstrap';
 
 import { Tooltip, Toast, Popover } from 'bootstrap';
 
+// this loads jquery, but does *not* set a global $ or jQuery variable
+const $ = require('jquery');
+
+import test from "./js/productPage";
+
