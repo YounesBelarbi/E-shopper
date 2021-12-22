@@ -55,12 +55,9 @@ App\Entity\Orders:
 
 App\Entity\OrderItem:
     orderItem{1..45}:
-        productName: '<fr_FR:word()>'
-        productPrice: '<randomFloat(2, 5, 150)>'
         quantity: '<randomDigit()>'
-        subtotalHT: '<randomFloat(2, 100, 250)>'
-        subtotalTTC: '<randomFloat(2, 200, 500)>'
-        taxe: '<randomDigit()>'
+        total: '<randomDigit()>'
+        product: '@product*'
         relatedOrder: '@orders*'
 
 App\Entity\Tags:

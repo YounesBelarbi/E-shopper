@@ -18,116 +18,30 @@ class orderItem
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $productName;
-
-    /**
-     * @ORM\Column(type="float")
-     */
-    private $productPrice;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $quantity;
-
-    /**
-     * @ORM\Column(type="float")
-     */
-    private $subtotalHT;
-
-    /**
-     * @ORM\Column(type="float")
-     */
-    private $taxe;
-
-    /**
-     * @ORM\Column(type="float")
-     */
-    private $subtotalTTC;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Orders::class, inversedBy="orderItem")
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $relatedOrder;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $total;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $quantity;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=product::class, inversedBy="orderItems")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $product;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getProductName(): ?string
-    {
-        return $this->productName;
-    }
-
-    public function setProductName(string $productName): self
-    {
-        $this->productName = $productName;
-
-        return $this;
-    }
-
-    public function getProductPrice(): ?float
-    {
-        return $this->productPrice;
-    }
-
-    public function setProductPrice(float $productPrice): self
-    {
-        $this->productPrice = $productPrice;
-
-        return $this;
-    }
-
-    public function getQuantity(): ?string
-    {
-        return $this->quantity;
-    }
-
-    public function setQuantity(string $quantity): self
-    {
-        $this->quantity = $quantity;
-
-        return $this;
-    }
-
-    public function getSubtotalHT(): ?float
-    {
-        return $this->subtotalHT;
-    }
-
-    public function setSubtotalHT(float $subtotalHT): self
-    {
-        $this->subtotalHT = $subtotalHT;
-
-        return $this;
-    }
-
-    public function getTaxe(): ?float
-    {
-        return $this->taxe;
-    }
-
-    public function setTaxe(float $taxe): self
-    {
-        $this->taxe = $taxe;
-
-        return $this;
-    }
-
-    public function getSubtotalTTC(): ?float
-    {
-        return $this->subtotalTTC;
-    }
-
-    public function setSubtotalTTC(float $subtotalTTC): self
-    {
-        $this->subtotalTTC = $subtotalTTC;
-
-        return $this;
     }
 
     public function getRelatedOrder(): ?Orders
@@ -138,6 +52,42 @@ class orderItem
     public function setRelatedOrder(?Orders $relatedOrder): self
     {
         $this->relatedOrder = $relatedOrder;
+
+        return $this;
+    }
+
+    public function getTotal(): ?int
+    {
+        return $this->total;
+    }
+
+    public function setTotal(int $total): self
+    {
+        $this->total = $total;
+
+        return $this;
+    }
+
+    public function getQuantity(): ?int
+    {
+        return $this->quantity;
+    }
+
+    public function setQuantity(int $quantity): self
+    {
+        $this->quantity = $quantity;
+
+        return $this;
+    }
+
+    public function getProduct(): ?product
+    {
+        return $this->product;
+    }
+
+    public function setProduct(?product $product): self
+    {
+        $this->product = $product;
 
         return $this;
     }
