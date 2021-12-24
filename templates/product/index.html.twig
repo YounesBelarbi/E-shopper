@@ -172,56 +172,55 @@
 								<li>Excepteur sint</li>
 							</ul>
 
-							<form action="" method="GET">
-								<input type="hidden" name="product-title" value="Activewear">
-								<div class="row">
-									<div class="col-auto">
-										<ul class="list-inline pb-3">
-											<li class="list-inline-item">Taille :
-												<input type="hidden" name="product-option" id="product-option" value="S">
-											</li>
-											<li class="list-inline-item">
-												<span class="btn btn-success btn-option">S</span>
-											</li>
-											<li class="list-inline-item">
-												<span class="btn btn-success btn-option">M</span>
-											</li>
-											<li class="list-inline-item">
-												<span class="btn btn-success btn-option">L</span>
-											</li>
-											<li class="list-inline-item">
-												<span class="btn btn-success btn-option">XL</span>
-											</li>
-										</ul>
-									</div>
-									<div class="col-auto">
-										<ul class="list-inline pb-3">
-											<li class="list-inline-item text-right">
-												Quantité
-												<input type="hidden" name="product-quantity" id="product-quantity" value="1">
-											</li>
-											<li class="list-inline-item">
-												<span class="btn btn-success" id="btn-reduce">-</span>
-											</li>
-											<li class="list-inline-item">
-												<span class="badge bg-secondary" id="var-value">1</span>
-											</li>
-											<li class="list-inline-item">
-												<span class="btn btn-success" id="btn-add">+</span>
-											</li>
-										</ul>
-									</div>
+							{{ form_start(form) }}
+							<input type="hidden" name="product-title" value="Activewear">
+							<div class="row">
+								<div class="col-auto">
+									<ul class="list-inline pb-3">
+										<li class="list-inline-item">Taille :
+											<input type="hidden" name="product-option" id="product-option" value="S">
+										</li>
+										<li class="list-inline-item">
+											<span class="btn btn-success btn-option">S</span>
+										</li>
+										<li class="list-inline-item">
+											<span class="btn btn-success btn-option">M</span>
+										</li>
+										<li class="list-inline-item">
+											<span class="btn btn-success btn-option">L</span>
+										</li>
+										<li class="list-inline-item">
+											<span class="btn btn-success btn-option">XL</span>
+										</li>
+									</ul>
 								</div>
-								<div class="row pb-3">
-									<div class="col d-grid">
-										<button type="submit" class="btn btn-success btn-lg" name="submit" value="buy">Acheter</button>
-									</div>
-									<div class="col d-grid">
-										<button type="submit" class="btn btn-success btn-lg" name="submit" value="addtocard">Ajouter au panier</button>
-									</div>
+								<div class="col-auto">
+									<ul class="list-inline pb-3">
+										<li class="list-inline-item text-right">
+											Quantité
+											{{ form_widget(form.quantity) }}
+										</li>
+										<li class="list-inline-item">
+											<span class="btn btn-success" id="btn-reduce">-</span>
+										</li>
+										<li class="list-inline-item">
+											<span class="badge bg-secondary" id="var-value">1</span>
+										</li>
+										<li class="list-inline-item">
+											<span class="btn btn-success" id="btn-add">+</span>
+										</li>
+									</ul>
 								</div>
-							</form>
-
+							</div>
+							<div class="row pb-3">
+								<div class="col d-grid">
+									<button type="submit" class="btn btn-success btn-lg" name="submit" value="buy">Acheter</button>
+								</div>
+								<div class="col d-grid">
+									{{ form_widget(form.add) }}
+								</div>
+							</div>
+							{{ form_end(form) }}
 						</div>
 					</div>
 				</div>

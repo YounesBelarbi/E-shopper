@@ -17,7 +17,7 @@ $(document).ready(function () {
         var val = $("#var-value").html();
         val++;
         $("#var-value").html(val);
-        $("#product-quantity").val(val);
+        $("#order_item_form_quantity").val(val);
         return false;
     });
     $('.btn-option').click(function () {
