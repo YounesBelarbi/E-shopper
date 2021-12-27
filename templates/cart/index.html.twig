@@ -1,0 +1,195 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CartController!
+{% endblock %}
+
+{% block body %}
+	<!-- Shopping Cart -->
+	<div class="shopping-cart section">
+		<div class="container py-5">
+			<div class="row">
+				<div class="col-12">
+					<table class="table cart-content">
+						<thead>
+							<tr class="main-hading">
+								<th>Produit</th>
+								<th>Déscriptif</th>
+								<th class="text-center">Prix</th>
+								<th class="text-center">Quantité</th>
+								<th class="text-center">Total</th>
+								<th class="text-center">
+									<i class="fas fa-trash-alt"></i>
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="image" data-title="No"><img src="https://via.placeholder.com/100x100" alt="#"></td>
+								<td class="product-des" data-title="Description">
+									<p class="product-name">
+										<a href="#">Lorem ipsum.</a>
+									</p>
+									<p class="product-des">Lorem ipsum dolor sit amet consectetur</p>
+								</td>
+								<td class="price" data-title="Price">
+									<span>110 €
+									</span>
+								</td>
+								<td
+									class="qty" data-title="Qty">
+									<!-- Input Order -->
+									<div class="input-group">
+										<div class="button minus">
+											<button type="button" class="btn btn-primary btn-number" data-type="minus" data-field="quant[1]">
+												<i class="fas fa-minus"></i>
+											</button>
+										</div>
+										<input type="text" name="quant[1]" class="input-number" data-min="1" data-max="100" value="1">
+										<div class="button plus">
+											<button type="button" class="btn btn-primary btn-number" data-type="plus" data-field="quant[1]">
+												<i class="fas fa-plus"></i>
+											</button>
+										</div>
+									</div>
+									<!--/ End Input Order -->
+								</td>
+								<td class="total-amount" data-title="Total">
+									<span>220.88 €</span>
+								</td>
+								<td class="action" data-title="Remove">
+									<a href="#">
+										<i class="fas fa-trash-alt"></i>
+									</a>
+								</td>
+							</tr>
+							<tr>
+								<td class="image" data-title="No"><img src="https://via.placeholder.com/100x100" alt="#"></td>
+								<td class="product-des" data-title="Description">
+									<p class="product-name">
+										<a href="#">Lorem ipsum</a>
+									</p>
+									<p class="product-des">Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
+								</td>
+								<td class="price" data-title="Price">
+									<span>145 €
+									</span>
+								</td>
+								<td
+									class="qty" data-title="Qty">
+									<!-- Input Order -->
+									<div class="input-group">
+										<div class="button minus">
+											<button type="button" class="btn btn-primary btn-number" disabled="disabled" data-type="minus" data-field="quant[2]">
+												<i class="fas fa-minus"></i>
+											</button>
+										</div>
+										<input type="text" name="quant[2]" class="input-number" data-min="1" data-max="100" value="2">
+										<div class="button plus">
+											<button type="button" class="btn btn-primary btn-number" data-type="plus" data-field="quant[2]">
+												<i class="fas fa-plus"></i>
+											</button>
+										</div>
+									</div>
+									<!--/ End Input Order -->
+								</td>
+								<td class="total-amount" data-title="Total">
+									<span>220.88 €</span>
+								</td>
+								<td class="action" data-title="Remove">
+									<a href="#">
+										<i class="fas fa-trash-alt"></i>
+									</a>
+								</td>
+							</tr>
+							<tr>
+								<td class="image" data-title="No"><img src="https://via.placeholder.com/100x100" alt="#"></td>
+								<td class="product-des" data-title="Description">
+									<p class="product-name">
+										<a href="#">lorem</a>
+									</p>
+									<p class="product-des">Lorem ipsum dolor sit amet consectetur adipisicing</p>
+								</td>
+								<td class="price" data-title="Price">
+									<span>122 €
+									</span>
+								</td>
+								<td
+									class="qty" data-title="Qty">
+									<!-- Input Order -->
+									<div class="input-group">
+										<div class="button minus">
+											<button type="button" class="btn btn-primary btn-number" data-type="minus" data-field="quant[3]">
+												<i class="fas fa-minus"></i>
+											</button>
+										</div>
+										<input type="text" name="quant[3]" class="input-number" data-min="1" data-max="100" value="3">
+										<div class="button plus">
+											<button type="button" class="btn btn-primary btn-number" data-type="plus" data-field="quant[3]">
+												<i class="fas fa-plus"></i>
+											</button>
+										</div>
+									</div>
+									<!--/ End Input Order -->
+								</td>
+								<td class="total-amount" data-title="Total">
+									<span>220.88 €</span>
+								</td>
+								<td class="action" data-title="Remove">
+									<a href="#">
+										<i class="fas fa-trash-alt"></i>
+									</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<!--/ End Shopping  -->
+				</div>
+			</div>
+			<div class="row">
+				<div
+					class="col-12">
+					<!-- Total Amount -->
+					<div class="total-amount">
+						<div class="row">
+							<div class="col-lg-8 col-md-5 col-12">
+								<div class="left">
+									<div class="coupon">
+										<form action="#" target="_blank">
+											<input name="Coupon" placeholder="Code Promo">
+											<button class="btn">Appliqué</button>
+										</form>
+									</div>
+									<div class="checkbox">
+										<label class="checkbox-inline" for="2"><input name="news" id="2" type="checkbox">
+											Livraison(+10 €)</label>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-4 col-md-7 col-12">
+								<div class="right">
+									<ul class="list-unstyled">
+										<li>Sous-total<span>330 €</span>
+										</li>
+										<li>livraison<span>Free</span>
+										</li>
+										<li>Vous économisez<span>20 €</span>
+										</li>
+										<li class="last">Total à payer
+											<span>$310.00</span>
+										</li>
+									</ul>
+									<div class="button5">
+										<a href="#" class="btn btn-success">Passer la commande</a>
+										<a href="#" type="button" class="btn btn-success">continuer mes achats</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--/ End Total Amount -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--/ End Shopping Cart -->
+{% endblock %}
