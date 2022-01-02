@@ -65,20 +65,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $adresses;
 
     /**
-     * @ORM\OneToMany(targetEntity=Orders::class, mappedBy="user", orphanRemoval=true)
-     */
-    private $orders;
-
-    /**
      * @ORM\OneToMany(targetEntity=Reviews::class, mappedBy="author")
      */
     private $reviews;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Orders::class, mappedBy="customer")
+     */
+    private $orders;
+
     public function __construct()
     {
         $this->adresses = new ArrayCollection();
-        $this->orders = new ArrayCollection();
         $this->reviews = new ArrayCollection();
+        $this->orders = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -249,36 +249,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection|Orders[]
-     */
-    public function getOrders(): Collection
-    {
-        return $this->orders;
-    }
-
-    public function addOrder(Orders $order): self
-    {
-        if (!$this->orders->contains($order)) {
-            $this->orders[] = $order;
-            $order->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeOrder(Orders $order): self
-    {
-        if ($this->orders->removeElement($order)) {
-            // set the owning side to null (unless already changed)
-            if ($order->getUser() === $this) {
-                $order->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
      * @return Collection|Reviews[]
      */
     public function getReviews(): Collection
@@ -302,6 +272,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($review->getAuthor() === $this) {
                 $review->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Orders[]
+     */
+    public function getOrders(): Collection
+    {
+        return $this->orders;
+    }
+
+    public function addOrder(Orders $order): self
+    {
+        if (!$this->orders->contains($order)) {
+            $this->orders[] = $order;
+            $order->setCustomer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrder(Orders $order): self
+    {
+        if ($this->orders->removeElement($order)) {
+            // set the owning side to null (unless already changed)
+            if ($order->getCustomer() === $this) {
+                $order->setCustomer(null);
             }
         }
 
