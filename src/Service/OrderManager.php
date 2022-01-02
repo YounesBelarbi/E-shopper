@@ -29,6 +29,11 @@ class OrderManager
      */
     private $entityManager;
 
+    /**
+     * @var Orders
+     */
+    private $currentOrder;
+
     function __construct(OrdersRepository $ordersRepository, RequestStack $requestStack, ManagerRegistry $doctrine)
     {
         $this->orderRepository = $ordersRepository;
@@ -42,15 +47,14 @@ class OrderManager
     public function getCurrentOrder()
     {
         if ($this->session->has('order_id')) {
-            $currentOrder = $this->orderRepository->find($this->session->get('order_id'));
+            $this->currentOrder = $this->orderRepository->find($this->session->get('order_id'));
         } else {
-            $currentOrder = new Orders;
-            $currentOrder
+            $this->currentOrder = new Orders;
+            $this->currentOrder
                 ->setReference(uniqid('order_', true))
                 ->setIsPaid(false)
                 ->setIsShipped(false);
         }
-        return $currentOrder;
     }
 
     /**
@@ -60,8 +64,8 @@ class OrderManager
      */
     public function addItemToCurrentOrder($product, $form)
     {
-        $currentOrder = $this->getCurrentOrder();
-        $itemExist = $this->checkIfOrderContainsProduct($currentOrder, $product);
+        $this->getCurrentOrder();
+        $itemExist = $this->checkIfOrderContainsProduct($product);
 
         if ($itemExist) {
             $itemExist->setQuantity($form->get('quantity')->getData());
@@ -71,21 +75,20 @@ class OrderManager
             $orderItem->setProduct($product);
             $orderItem->setTotal($product->getPrice() * $form->get('quantity')->getData());
 
-            $currentOrder
+            $this->currentOrder
                 ->addOrderItem($orderItem);
         }
 
-        $this->saveOrder($currentOrder);
+        $this->saveOrder();
     }
 
     /**
-     * @param Orders $order
      * @param Product $product
      * @return void
      */
-    public function checkIfOrderContainsProduct(Orders $order, Product $product)
+    public function checkIfOrderContainsProduct(Product $product)
     {
-        foreach ($order->getOrderItem() as $key => $orderItem) {
+        foreach ($this->currentOrder->getOrderItem() as $orderItem) {
             if ($orderItem->getProduct() == $product) {
                 return $orderItem;
             }
@@ -94,43 +97,40 @@ class OrderManager
     }
 
     /**
-     * @param Orders $currentOrder
      * @return void
      */
-    public function saveOrder(Orders $currentOrder)
+    public function saveOrder()
     {
-        $this->entityManager->persist($currentOrder);
-        $this->getOrderTotal($currentOrder);
+        $this->entityManager->persist($this->currentOrder);
+        $this->getOrderTotal();
         $this->entityManager->flush();
-        $this->saveOrderToSession($currentOrder);
+        $this->saveOrderToSession();
     }
 
     /**
-     * @param Orders $currentOrder
      * @return void
      */
-    public function getOrderTotal(Orders $currentOrder)
+    public function getOrderTotal()
     {
         $total = 0;
-        foreach ($currentOrder->getOrderItem() as $itemOrder) {
+        foreach ($this->currentOrder->getOrderItem() as $itemOrder) {
             $total += $itemOrder->getTotal();
         }
 
-        $currentOrder
+        $this->currentOrder
             ->setTotal($total);
     }
 
     /**
-     * @param Orders $currentOrder
      * @return void
      */
-    public function saveOrderToSession(Orders $currentOrder)
+    public function saveOrderToSession()
     {
-        $cartSession = $this->session->get('order_id', $currentOrder->getId());
+        $cartSession = $this->session->get('order_id', $this->currentOrder->getId());
         $this->session->set('order_id', $cartSession);
 
         $productCart = [];
-        foreach ($currentOrder->getOrderItem() as $value) {
+        foreach ($this->currentOrder->getOrderItem() as $value) {
             $productCart[$value->getProduct()->getName()] = $value->getQuantity();
         }
 
