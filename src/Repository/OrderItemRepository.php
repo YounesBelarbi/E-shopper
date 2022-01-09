@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\orderItem;
+use App\Entity\OrderItem;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

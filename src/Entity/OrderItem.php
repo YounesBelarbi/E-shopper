@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\orderItemRepository;
+use App\Repository\OrderItemRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=orderItemRepository::class)
+ * @ORM\Entity(repositoryClass=OrderItemRepository::class)
  */
 class OrderItem
 {
@@ -34,7 +34,7 @@ class OrderItem
     private $quantity;
 
     /**
-     * @ORM\ManyToOne(targetEntity=product::class, inversedBy="orderItems")
+     * @ORM\ManyToOne(targetEntity=Product::class, inversedBy="orderItems")
      * @ORM\JoinColumn(nullable=false)
      */
     private $product;

@@ -1,4 +1,5 @@
 .table{
+    width: 100%;
     &.cart-content {
         background: #fff;
     }
@@ -71,6 +72,8 @@
 
         & .total-amount {
             text-align: center;
+            width: 12%;
+
         }
 
         & .action {
@@ -87,6 +90,7 @@
 
         & .price {
             text-align: center;
+            width: 12%;
         }
     }
 }
