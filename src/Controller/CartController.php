@@ -4,12 +4,14 @@ namespace App\Controller;
 
 use App\Entity\OrderItem;
 use App\Form\CartOrdersFormType;
+use App\Repository\OrderItemRepository;
 use App\Repository\OrdersRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -65,5 +67,42 @@ class CartController extends AbstractController
 
         $session->set('product_list', $productCart);
         return $this->redirectToRoute('cart_index');
+    }
+
+    /**
+     * @Route("/product/quantity ", name="product_quantity")
+     */
+    public function add(Request $request, OrderItemRepository $orderItemRepository, ManagerRegistry $doctrine, RequestStack $requestStack, OrdersRepository $orderRepository): Response
+    {
+        $data = $request->toArray();
+        $orderItem = $orderItemRepository->find($data['orderItemId']);
+        $session = $requestStack->getSession();
+        $currentOrder = $orderRepository->find($session->get('order_id'));
+
+        $orderItem
+            ->setQuantity($data['productQuantity'])
+            ->setTotal($data['productQuantity'] * $orderItem->getProduct()->getPrice());
+
+
+        $total = 0;
+        foreach ($currentOrder->getOrderItem() as $itemOrder) {
+            $total += $itemOrder->getTotal();
+        }
+
+        $currentOrder
+            ->setTotal($total);
+
+
+        $entityManager = $doctrine->getManager();
+        $entityManager->flush();
+
+        $productCart = [];
+        foreach ($currentOrder->getOrderItem() as $itemOrder) {
+            $productCart[$itemOrder->getProduct()->getName()] = $itemOrder->getQuantity();
+        }
+
+        $session->set('product_list', $productCart);
+
+        return new JsonResponse(['orderItemTotal' => $orderItem->getTotal(), 'orderTotal' => $total]);
     }
 }
