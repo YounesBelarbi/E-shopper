@@ -26,11 +26,6 @@ class OrderItem
     /**
      * @ORM\Column(type="integer")
      */
-    private $total;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
     private $quantity;
 
     /**
@@ -38,6 +33,11 @@ class OrderItem
      * @ORM\JoinColumn(nullable=false)
      */
     private $product;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $total;
 
     public function getId(): ?int
     {
@@ -52,18 +52,6 @@ class OrderItem
     public function setRelatedOrder(?Orders $relatedOrder): self
     {
         $this->relatedOrder = $relatedOrder;
-
-        return $this;
-    }
-
-    public function getTotal(): ?int
-    {
-        return $this->total;
-    }
-
-    public function setTotal(int $total): self
-    {
-        $this->total = $total;
 
         return $this;
     }
@@ -88,6 +76,18 @@ class OrderItem
     public function setProduct(?product $product): self
     {
         $this->product = $product;
+
+        return $this;
+    }
+
+    public function getTotal(): ?float
+    {
+        return $this->total;
+    }
+
+    public function setTotal(float $total): self
+    {
+        $this->total = $total;
 
         return $this;
     }
