@@ -6,6 +6,7 @@ use App\Entity\OrderItem;
 use App\Form\CartOrdersFormType;
 use App\Repository\OrderItemRepository;
 use App\Repository\OrdersRepository;
+use App\Service\CartManager;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,10 +32,10 @@ class CartController extends AbstractController
             $order = $ordersRepository->find($session->get('order_id'));
             $form = $this->createForm(CartOrdersFormType::class, $order);
             $form->handleRequest($request);
-        }
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            return $this->redirect($request->getUri());
+            if ($form->isSubmitted() && $form->isValid()) {
+                return $this->redirect($request->getUri());
+            }
         }
 
         return $this->render('cart/index.html.twig', [
@@ -45,63 +46,35 @@ class CartController extends AbstractController
     /**
      * @Route("/delete/{id}", name="delete")
      */
-    public function delete(OrderItem $orderItem, Request $request,  ManagerRegistry $doctrine, RequestStack $requestStack, OrdersRepository $orderRepository): Response
+    public function deleteOrderItem(OrderItem $orderItem, ManagerRegistry $doctrine, RequestStack $requestStack, OrdersRepository $orderRepository, CartManager $cartManager): Response
     {
-        $entityManager = $doctrine->getManager();
         $session = $requestStack->getSession();
         $currentOrder = $orderRepository->find($session->get('order_id'));
+        $entityManager = $doctrine->getManager();
         $entityManager->remove($orderItem);
-
-        $orderItemTotal = $orderItem->getTotal();
-        $orderTotal = $currentOrder->getTotal();
-
-        $currentOrder
-            ->setTotal($orderTotal - $orderItemTotal);
-
+        $currentOrder->setTotal($currentOrder->getTotal() - $orderItem->getTotal());
         $entityManager->flush();
+        $cartManager->updateCartProductList();
 
-        $productCart = [];
-        foreach ($currentOrder->getOrderItem() as $itemOrder) {
-            $productCart[$itemOrder->getProduct()->getName()] = $itemOrder->getQuantity();
-        }
-
-        $session->set('product_list', $productCart);
         return $this->redirectToRoute('cart_index');
     }
 
     /**
      * @Route("/product/quantity ", name="product_quantity")
      */
-    public function add(Request $request, OrderItemRepository $orderItemRepository, ManagerRegistry $doctrine, RequestStack $requestStack, OrdersRepository $orderRepository): Response
+    public function updateProductQuantity(Request $request, OrderItemRepository $orderItemRepository, ManagerRegistry $doctrine, CartManager $cartManager): Response
     {
         $data = $request->toArray();
         $orderItem = $orderItemRepository->find($data['orderItemId']);
-        $session = $requestStack->getSession();
-        $currentOrder = $orderRepository->find($session->get('order_id'));
 
         $orderItem
             ->setQuantity($data['productQuantity'])
             ->setTotal($data['productQuantity'] * $orderItem->getProduct()->getPrice());
 
-
-        $total = 0;
-        foreach ($currentOrder->getOrderItem() as $itemOrder) {
-            $total += $itemOrder->getTotal();
-        }
-
-        $currentOrder
-            ->setTotal($total);
-
-
+        $total = $cartManager->getOrderTotal();
         $entityManager = $doctrine->getManager();
         $entityManager->flush();
-
-        $productCart = [];
-        foreach ($currentOrder->getOrderItem() as $itemOrder) {
-            $productCart[$itemOrder->getProduct()->getName()] = $itemOrder->getQuantity();
-        }
-
-        $session->set('product_list', $productCart);
+        $cartManager->updateCartProductList();
 
         return new JsonResponse(['orderItemTotal' => $orderItem->getTotal(), 'orderTotal' => $total]);
     }
