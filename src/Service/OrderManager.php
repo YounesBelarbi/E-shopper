@@ -2,61 +2,10 @@
 
 namespace App\Service;
 
-use App\Entity\Orders;
 use App\Entity\Product;
-use App\Repository\OrdersRepository;
-use Symfony\Component\HttpFoundation\RequestStack;
-use Doctrine\Persistence\ManagerRegistry;
 
-
-class OrderManager
+class OrderManager extends CartOrderService
 {
-    /**
-     *
-     * @var OrdersRepository
-     */
-    private $orderRepository;
-
-    /**
-     *
-     * @var Session
-     */
-    private $session;
-
-    /**
-     *
-     * @var ManagerRegistry
-     */
-    private $entityManager;
-
-    /**
-     * @var Orders
-     */
-    private $currentOrder;
-
-    function __construct(OrdersRepository $ordersRepository, RequestStack $requestStack, ManagerRegistry $doctrine)
-    {
-        $this->orderRepository = $ordersRepository;
-        $this->session = $requestStack->getSession();
-        $this->entityManager = $doctrine->getManager();
-    }
-
-    /**
-     * @return Order
-     */
-    public function getCurrentOrder()
-    {
-        if ($this->session->has('order_id')) {
-            $this->currentOrder = $this->orderRepository->find($this->session->get('order_id'));
-        } else {
-            $this->currentOrder = new Orders;
-            $this->currentOrder
-                ->setReference(uniqid('order_', true))
-                ->setIsPaid(false)
-                ->setIsShipped(false);
-        }
-    }
-
     /**
      * @param Product $product
      * @param [type]  $form
@@ -64,7 +13,6 @@ class OrderManager
      */
     public function addItemToCurrentOrder($product, $form)
     {
-        $this->getCurrentOrder();
         $itemExist = $this->checkIfOrderContainsProduct($product);
 
         if ($itemExist) {
@@ -105,20 +53,6 @@ class OrderManager
         $this->getOrderTotal();
         $this->entityManager->flush();
         $this->saveOrderToSession();
-    }
-
-    /**
-     * @return void
-     */
-    public function getOrderTotal()
-    {
-        $total = 0;
-        foreach ($this->currentOrder->getOrderItem() as $itemOrder) {
-            $total += $itemOrder->getTotal();
-        }
-
-        $this->currentOrder
-            ->setTotal($total);
     }
 
     /**
