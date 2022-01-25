@@ -1,0 +1,159 @@
+.cart-dropdown {
+	position: absolute;
+	top: 30px;
+	right: 0;
+	width: 300px;
+	background: #fff;
+	padding: 20px 25px;    
+	transition: all 0.3s ease 0s;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+	opacity:1;
+	visibility:hidden;
+	z-index:500;
+
+    & .total {
+        overflow:hidden;
+        display: block;
+        padding-bottom: 10px;
+
+        & span {
+            text-transform:uppercase;
+            color:#222;
+            font-size:13px;
+            font-weight:600;
+            float:left;
+        }
+
+        & .total-amount {
+            float:right;
+            font-size:14px;
+        }
+        
+    }
+}
+
+#dropdown-checkout-button  {
+    background: #59ab6e;
+    padding: 10px 20px;
+    display: block;
+    // color: white;
+    margin-top: 10px;
+    border-radius: 0px;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 500;
+    width:100%;
+
+    &:hover{
+        background:#F7941D;
+        color:#fff;
+    }
+}
+
+.cart-button:hover .cart-dropdown{
+	transform: translateY(13px);
+	opacity:1;
+	visibility:visible;
+	z-index:99;
+
+}
+
+.dropdown-cart-header{
+	padding-bottom: 10px;
+    margin-bottom: 15px;
+	border-bottom:1px solid #e6e6e6;
+
+    & span {
+        text-transform: uppercase;
+        color: #222;
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+    & a {
+        float: right;
+        text-transform: uppercase;
+        color: #222;
+        font-size: 13px;
+        text-decoration: none;
+    }
+
+    & a:hover{
+        color:#F7941D;
+    }
+}
+
+.shopping-list {
+    & li {
+        overflow: hidden;
+        border-bottom: 1px solid #e6e6e6;
+        padding-bottom: 15px;
+        margin-bottom: 15px;
+        position:relative;
+
+        & .remove {
+            position: absolute;
+            left: 0;
+            bottom: 16px;
+            margin-top: -20px;
+            height: 20px;
+            width: 20px;
+            line-height: 18px;
+            text-align: center;
+            background: #fff;
+            color: #222;
+            border-radius: 0;
+            font-size: 11px;
+            border: 1px solid #ededed;
+        }
+
+        & .remove:hover{
+            background:#222;
+            color:#fff !important;
+            border-color:transparent;
+        }
+    }
+
+    & .cart-img {
+        float: right;
+        border: 1px solid #ededed;
+        overflow:hidden;
+
+        & img {
+            width: 70px;
+            height: 70px;
+            border-radius:0;
+            
+        }
+
+        &:hover img{
+            transform:scale(1.09);
+        }
+    }
+
+    & .quantity{
+        line-height: 22px;
+        font-size: 13px;
+        padding-bottom: 25px;
+    }
+
+    & h4 {
+        font-size: 14px;
+
+        & a {
+            font-weight: 600;
+            font-size: 13px;
+            color: #333;
+            text-decoration: none;
+
+            &:hover{
+                color:#F7941D;
+            }
+        }
+    }
+}
+
+.cart-button {
+    position: relative;
+    display: inline-block;
+}

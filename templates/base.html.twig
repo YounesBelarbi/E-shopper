@@ -91,17 +91,53 @@
 						<a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal" data-bs-target="#search">
 							<i class="fa fa-fw fa-search text-dark mr-2"></i>
 						</a>
-						<a class="nav-icon position-relative text-decoration-none" href="{{ path('cart_index') }}">
-							<i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
-							<span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">7</span>
-						</a>
+						<div class="cart-button">
+							<a class="nav-icon position-relative text-decoration-none" href="{{ app.session.get('product_list')|length == 0 ? path('cart_index') : '#' }}">
+								<i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
+								{% if  app.session.get('product_list')|length %}
+									<span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-danger text-white">{{app.session.get('product_list')|length}}</span>
+								{% endif %}
+							</a>
+							{% if  app.session.get('product_list')|length and app.request.attributes.get('_route') != 'cart_index' %}
+								<div class="cart-dropdown">
+									<div class="dropdown-cart-header">
+										<span>{{app.session.get('product_list')|length}}
+											{{ (app.session.get('product_list')|length < 2) ? 'produit' : 'produits'  }}</span>
+										<a href="{{path('cart_index')}}">Voir mon panier</a>
+									</div>
+									<ul class="shopping-list">
+										{% for item in app.session.get('product_list') %}
+											<li>
+												<a href="{{ path('cart_delete', {'id': item.itemOrderId}) }}" class="remove" title="Remove this item">
+													<i class="fas fa-times"></i>
+												</a>
+												<a class="cart-img" href="#"><img src="https://via.placeholder.com/70x70" alt="#"></a>
+												<h4>
+													<a href="{{ path('product_details', {id: item.product.id}) }}">{{item.product.name}}</a>
+												</h4>
+												<p class="quantity">{{item.quantity}}x -
+													<span class="amount">{{item.product.price}}
+														€</span>
+												</p>
+											</li>
+										{% endfor %}
+									</ul>
+									<div class="bottom">
+										<div class="total">
+											<span>Total</span>
+											<span class="total-amount">$134.00</span>
+										</div>
+										<a href="checkout.html" id="dropdown-checkout-button" class="btn animate">Passer ma comande</a>
+									</div>
+								</div>
+							{% endif %}
+						</div>
 						<a class="nav-icon position-relative text-decoration-none" href="#">
 							<i class="fa fa-fw fa-user text-dark mr-3"></i>
 							<span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">+99</span>
 						</a>
 					</div>
 				</div>
-
 			</div>
 		</nav>
 		<!-- Header -->
