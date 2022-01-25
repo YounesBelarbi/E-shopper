@@ -4,16 +4,9 @@ namespace App\Service;
 
 class CartManager extends CartOrderService
 {
-    /**
-     * @return void
-     */
-    public function updateCartProductList()
+    public function clearCart()
     {
-        $productCart = [];
-        foreach ($this->currentOrder->getOrderItem() as $itemOrder) {
-            $productCart[$itemOrder->getProduct()->getName()] = $itemOrder->getQuantity();
-        }
-
-        $this->session->set('product_list', $productCart);
+        $this->removeOrder();
+        $this->session->clear();
     }
 }

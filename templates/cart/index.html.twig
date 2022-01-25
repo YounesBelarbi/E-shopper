@@ -6,7 +6,7 @@
 {% block body %}
 	<!-- Shopping Cart -->
 	<div class="shopping-cart section">
-		{% if form is not null and form.orderItem.count > 0 %}
+		{% if form is defined and form.orderItem.count > 0 %}
 			<div class="container py-5">
 				{{form_start(form)}}
 				<div class="row">
@@ -20,7 +20,10 @@
 									<th class="text-center">Quantité</th>
 									<th class="text-center">Total</th>
 									<th class="text-center">
-										<i class="fas fa-trash-alt"></i>
+										<a id="clear-cart" href="{{ path('cart_clear') }}">
+
+											<i class="fas fa-trash-alt"></i>
+										</a>
 									</th>
 								</tr>
 							</thead>

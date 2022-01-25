@@ -27,7 +27,7 @@ class OrderManager extends CartOrderService
                 ->addOrderItem($orderItem);
         }
 
-        $this->saveOrder();
+        $this->saveOrderToDatabase();
     }
 
     /**
@@ -47,7 +47,7 @@ class OrderManager extends CartOrderService
     /**
      * @return void
      */
-    public function saveOrder()
+    public function saveOrderToDatabase()
     {
         $this->entityManager->persist($this->currentOrder);
         $this->getOrderTotal();
@@ -62,12 +62,6 @@ class OrderManager extends CartOrderService
     {
         $cartSession = $this->session->get('order_id', $this->currentOrder->getId());
         $this->session->set('order_id', $cartSession);
-
-        $productCart = [];
-        foreach ($this->currentOrder->getOrderItem() as $value) {
-            $productCart[$value->getProduct()->getName()] = $value->getQuantity();
-        }
-
-        $this->session->set('product_list', $productCart);
+        $this->updateCartContent();
     }
 }

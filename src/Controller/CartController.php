@@ -25,7 +25,6 @@ class CartController extends AbstractController
      */
     public function index(Request $request, RequestStack $requestStack, OrdersRepository $ordersRepository): Response
     {
-
         $session = $requestStack->getSession();
 
         if ($session->has('order_id')) {
@@ -36,17 +35,19 @@ class CartController extends AbstractController
             if ($form->isSubmitted() && $form->isValid()) {
                 return $this->redirect($request->getUri());
             }
+
+            return $this->render('cart/index.html.twig', [
+                'form' => $form->createView(),
+            ]);
         }
 
-        return $this->render('cart/index.html.twig', [
-            'form' => $form->createView(),
-        ]);
+        return $this->render('cart/index.html.twig');
     }
 
     /**
      * @Route("/delete/{id}", name="delete")
      */
-    public function deleteOrderItem(OrderItem $orderItem, ManagerRegistry $doctrine, RequestStack $requestStack, OrdersRepository $orderRepository, CartManager $cartManager): Response
+    public function deleteOrderItem(OrderItem $orderItem, Request $request, ManagerRegistry $doctrine, RequestStack $requestStack, OrdersRepository $orderRepository, CartManager $cartManager): Response
     {
         $session = $requestStack->getSession();
         $currentOrder = $orderRepository->find($session->get('order_id'));
@@ -54,9 +55,8 @@ class CartController extends AbstractController
         $entityManager->remove($orderItem);
         $currentOrder->setTotal($currentOrder->getTotal() - $orderItem->getTotal());
         $entityManager->flush();
-        $cartManager->updateCartProductList();
-
-        return $this->redirectToRoute('cart_index');
+        $cartManager->updateCartContent();
+        return $this->redirect($request->headers->get('referer'));
     }
 
     /**
@@ -74,8 +74,17 @@ class CartController extends AbstractController
         $total = $cartManager->getOrderTotal();
         $entityManager = $doctrine->getManager();
         $entityManager->flush();
-        $cartManager->updateCartProductList();
+        $cartManager->updateCartContent();
 
         return new JsonResponse(['orderItemTotal' => $orderItem->getTotal(), 'orderTotal' => $total]);
+    }
+
+    /**
+     * @Route("/clear ", name="clear")
+     */
+    public function clearCart(CartManager $cartManager): Response
+    {
+        $cartManager->clearCart();
+        return $this->redirectToRoute('cart_index');
     }
 }

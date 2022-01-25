@@ -72,4 +72,23 @@ class CartOrderService
 
         return $total;
     }
+
+    public function updateCartContent()
+    {
+        $productCart = [];
+        foreach ($this->currentOrder->getOrderItem() as $value) {
+
+            $productCart[$value->getProduct()->getName()]['product'] = $value->getProduct();
+            $productCart[$value->getProduct()->getName()]['quantity'] = $value->getQuantity();
+            $productCart[$value->getProduct()->getName()]['itemOrderId'] = $value->getId();
+        }
+
+        $this->session->set('product_list', $productCart);
+    }
+
+    public function removeOrder()
+    {
+        $this->entityManager->remove($this->currentOrder);
+        $this->entityManager->flush();
+    }
 }
