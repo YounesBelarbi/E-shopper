@@ -44,7 +44,7 @@ App\Entity\Categories:
         image: '<imageUrl(640, 480)>'
 
 App\Entity\Orders:
-    orders{1..25}:
+    orders{1..50}:
         reference: '<ean8()>'
         name: '<fr_FR:word()>'
         isPaid: '<boolean()>'
@@ -52,7 +52,9 @@ App\Entity\Orders:
         carrierName: '<fr_FR:word()>'
         carrierPrice: '<randomFloat(0, 5, 10)>'
         createdAt: '<date_create()>'
-        user: '@user*'
+        customer: '@user*'
+        total: '<randomDigit()>'
+        is_shipped: '<boolean()>'
 
 App\Entity\OrderItem:
     orderItem{1..45}:
