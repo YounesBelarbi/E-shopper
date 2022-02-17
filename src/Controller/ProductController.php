@@ -2,17 +2,37 @@
 
 namespace App\Controller;
 
+use App\Entity\Product;
+use App\Form\OrderItemFormType;
+use App\Service\OrderManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("/product", name="product_")
+ */
 class ProductController extends AbstractController
 {
     /**
-     * @Route("/product", name="product")
+     * @Route("/details/{id}", name="details")
      */
-    public function index(): Response
+    public function productDetails(Product $product, Request $request, OrderManager $orderManager): Response
     {
-        return $this->render('product/index.html.twig');
+        $form = $this->createForm(OrderItemFormType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $orderManager->addItemToCurrentOrder($product, $form);
+
+            return $this->redirect($request->getUri());
+        }
+
+        return $this->render('product/index.html.twig', [
+            'product' => $product,
+            'form' => $form->createView(),
+        ]);
     }
 }

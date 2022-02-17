@@ -1,0 +1,139 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CartController!
+{% endblock %}
+
+{% block body %}
+	<!-- Shopping Cart -->
+	<div class="shopping-cart section">
+		{% if form is defined and form.orderItem.count > 0 %}
+			<div class="container py-5">
+				{{form_start(form)}}
+				<div class="row">
+					<div class="col-12">
+						<table class="table cart-content">
+							<thead>
+								<tr class="main-hading">
+									<th>Produit</th>
+									<th>Déscriptif</th>
+									<th class="text-center">Prix</th>
+									<th class="text-center">Quantité</th>
+									<th class="text-center">Total</th>
+									<th class="text-center">
+										<a id="clear-cart" href="{{ path('cart_clear') }}">
+
+											<i class="fas fa-trash-alt"></i>
+										</a>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for item in form.orderItem %}
+									<tr>
+										<td class="image" data-title="No"><img src="https://via.placeholder.com/100x100" alt="#"></td>
+										<td class="product-des" data-title="Description">
+											<p class="product-name">
+												<a href="#">{{item.vars.data.product.name}}</a>
+											</p>
+											<p class="product-des">{{item.vars.data.product.description}}</p>
+										</td>
+										<td class="price" data-title="Price">
+											<span>{{item.vars.data.product.price}}
+												€
+											</span>
+										</td>
+										<td
+											class="qty" data-title="Qty">
+											<!-- Input Order -->
+											<div class="input-group " data-id="{{item.vars.data.id}}">
+												<div
+													class="button minus">
+													{# {{ form_widget(item.add, {'fa' : 'fas fa-minus','right' : true}) }} #}
+													<button type="button" class="btn btn-primary btn-number cart-btn-reduce minus " data-type="minus" data-field="quant[1]">
+														<i class="fas fa-minus minus "></i>
+													</button>
+												</div>
+												<input type="text" name="quant[1]" class="input-number cart-product-quantity" value="{{item.vars.data.quantity}}">
+												<div class="button plus">
+													<button type="button" class="btn btn-primary btn-number cart-btn-add plus" data-type="plus" data-field="quant[1]">
+														<i class="fas fa-plus plus "></i>
+													</button>
+													{# <a href=""><span class="btn btn-success" id="cart-btn-add"><i class="fas fa-plus"></i></span></a> #}
+												</div>
+											</div>
+											<!--/ End Input Order -->
+										</td>
+										<td class="total-amount" data-title="Total">
+											<span class="item-{{item.vars.data.id}} cart-product-total">{{item.vars.data.total}}
+												€</span>
+										</td>
+										<td class="action" data-title="Remove">
+											<a href="{{ path('cart_delete', {'id': item.vars.data.id}) }}">
+												<i class="fas fa-trash-alt"></i>
+											</a>
+										</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+						<!--/ End Shopping  -->
+					</div>
+				</div>
+				<div class="row">
+					<div
+						class="col-12">
+						<!-- Total Amount -->
+						<div class="total-amount">
+							<div class="row">
+								<div class="col-lg-8 col-md-5 col-12">
+									<div class="left">
+										<div class="coupon">
+											<form action="#" target="_blank">
+												<input name="Coupon" placeholder="Code Promo">
+												<button class="btn">Appliqué</button>
+											</form>
+										</div>
+										<div class="checkbox">
+											<label class="checkbox-inline" for="2"><input name="news" id="2" type="checkbox">
+												Livraison(+10 €)</label>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-4 col-md-7 col-12">
+									<div class="right">
+										<ul class="list-unstyled">
+											<li>Sous-total<span class="order-total">{{form.vars.value.total}}
+													€</span>
+											</li>
+											<li>livraison<span>Free</span>
+											</li>
+											<li>Vous économisez<span>20 €</span>
+											</li>
+											<li class="last">Total à payer
+												<span>$310.00</span>
+											</li>
+										</ul>
+										<div class="button5">
+											<a href="#" class="btn btn-success">Passer la commande</a>
+											<a href="#" type="button" class="btn btn-success">continuer mes achats</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--/ End Total Amount -->
+					</div>
+				</div>
+				{{ form_widget(form._token) }}
+				{{form_end(form, {render_rest: false})}}
+			</div>
+		{% else %}
+			<div class="alert alert-info">
+				Votre panier est vide
+				<a href="{{ path('home') }}">revenir vers la boutique</a>.
+			</div>
+		{% endif %}
+	</div>
+
+	<!--/ End Shopping Cart -->
+{% endblock %}

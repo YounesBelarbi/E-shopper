@@ -24,7 +24,7 @@ App\Entity\Address:
         user: '@user*'
 
 App\Entity\Product:
-    product{1..5}:
+    product{1..20}:
         name: '<fr_FR:word()>'
         description: '<fr_FR:text()>'
         complement: '<fr_FR:postcode()>'
@@ -36,6 +36,7 @@ App\Entity\Product:
         isNewArrival: '<boolean()>'
         isFeatured: '<boolean()>'
         isSpecialOffer: '<boolean()>'
+        rating: '<numberBetween(0,5)>'
 
 App\Entity\Categories:
     categories{1..10}:
@@ -43,7 +44,7 @@ App\Entity\Categories:
         image: '<imageUrl(640, 480)>'
 
 App\Entity\Orders:
-    orders{1..25}:
+    orders{1..50}:
         reference: '<ean8()>'
         name: '<fr_FR:word()>'
         isPaid: '<boolean()>'
@@ -51,16 +52,15 @@ App\Entity\Orders:
         carrierName: '<fr_FR:word()>'
         carrierPrice: '<randomFloat(0, 5, 10)>'
         createdAt: '<date_create()>'
-        user: '@user*'
+        customer: '@user*'
+        total: '<randomDigit()>'
+        is_shipped: '<boolean()>'
 
-App\Entity\OrderDetails:
-    orderDetails{1..45}:
-        productName: '<fr_FR:word()>'
-        productPrice: '<randomFloat(2, 5, 150)>'
+App\Entity\OrderItem:
+    orderItem{1..45}:
         quantity: '<randomDigit()>'
-        subtotalHT: '<randomFloat(2, 100, 250)>'
-        subtotalTTC: '<randomFloat(2, 200, 500)>'
-        taxe: '<randomDigit()>'
+        total: '<randomDigit()>'
+        product: '@product*'
         relatedOrder: '@orders*'
 
 App\Entity\Tags:
@@ -72,6 +72,6 @@ App\Entity\Reviews:
     reviews{1..25}:
         note: '<numberBetween(0, 6)>'
         comment: '<fr_FR:realText()>'
-        user: '@user*'
+        author: '@user*'
         product: '@product*'
         createdAt: '<date_create()>'

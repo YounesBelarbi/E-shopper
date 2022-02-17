@@ -89,6 +89,16 @@ class Product
      */
     private $relatedTo;
 
+    /**
+     * @ORM\OneToMany(targetEntity=OrderItem::class, mappedBy="product")
+     */
+    private $orderItems;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $rating;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -96,6 +106,7 @@ class Product
         $this->reviews = new ArrayCollection();
         $this->relatedProducts = new ArrayCollection();
         $this->relatedTo = new ArrayCollection();
+        $this->orderItems = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -336,6 +347,48 @@ class Product
         if ($this->relatedTo->removeElement($relatedTo)) {
             $relatedTo->removeRelatedProduct($this);
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|OrderItem[]
+     */
+    public function getOrderItems(): Collection
+    {
+        return $this->orderItems;
+    }
+
+    public function addOrderItem(OrderItem $orderItem): self
+    {
+        if (!$this->orderItems->contains($orderItem)) {
+            $this->orderItems[] = $orderItem;
+            $orderItem->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrderItem(OrderItem $orderItem): self
+    {
+        if ($this->orderItems->removeElement($orderItem)) {
+            // set the owning side to null (unless already changed)
+            if ($orderItem->getProduct() === $this) {
+                $orderItem->setProduct(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getRating(): ?int
+    {
+        return $this->rating;
+    }
+
+    public function setRating(?int $rating): self
+    {
+        $this->rating = $rating;
 
         return $this;
     }

@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=OrdersRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class Orders
 {
@@ -30,12 +31,12 @@ class Orders
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $carrierName;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", nullable=true)
      */
     private $carrierPrice;
 
@@ -55,19 +56,38 @@ class Orders
     private $createdAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="orders")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\OneToMany(targetEntity=OrderItem::class, mappedBy="relatedOrder", cascade={"persist", "remove"}, orphanRemoval=true)
      */
-    private $user;
+    private $orderItem;
 
     /**
-     * @ORM\OneToMany(targetEntity=OrderDetails::class, mappedBy="relatedOrder")
+     * @ORM\Column(type="float")
      */
-    private $orderDetails;
+    private $total;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updateAt;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isShipped;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="orders")
+     */
+    private $customer;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updatedAt;
 
     public function __construct()
     {
-        $this->orderDetails = new ArrayCollection();
+        $this->orderItem = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -159,45 +179,110 @@ class Orders
         return $this;
     }
 
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
     /**
-     * @return Collection|OrderDetails[]
+     * @return Collection|orderItem[]
      */
-    public function getOrderDetails(): Collection
+    public function getOrderItem(): Collection
     {
-        return $this->orderDetails;
+        return $this->orderItem;
     }
 
-    public function addOrderDetail(OrderDetails $orderDetail): self
+    public function addOrderItem(orderItem $orderItem): self
     {
-        if (!$this->orderDetails->contains($orderDetail)) {
-            $this->orderDetails[] = $orderDetail;
-            $orderDetail->setRelatedOrder($this);
+        if (!$this->orderItem->contains($orderItem)) {
+            $this->orderItem[] = $orderItem;
+            $orderItem->setRelatedOrder($this);
         }
 
         return $this;
     }
 
-    public function removeOrderDetail(OrderDetails $orderDetail): self
+    public function removeOrderItem(orderItem $orderItem): self
     {
-        if ($this->orderDetails->removeElement($orderDetail)) {
+        if ($this->orderItem->removeElement($orderItem)) {
             // set the owning side to null (unless already changed)
-            if ($orderDetail->getRelatedOrder() === $this) {
-                $orderDetail->setRelatedOrder(null);
+            if ($orderItem->getRelatedOrder() === $this) {
+                $orderItem->setRelatedOrder(null);
             }
         }
 
         return $this;
+    }
+
+    public function getTotal(): ?float
+    {
+        return $this->total;
+    }
+
+    public function setTotal(float $total): self
+    {
+        $this->total = $total;
+
+        return $this;
+    }
+
+    public function getUpdateAt(): ?\DateTimeInterface
+    {
+        return $this->updateAt;
+    }
+
+    public function setUpdateAt(?\DateTimeInterface $updateAt): self
+    {
+        $this->updateAt = $updateAt;
+
+        return $this;
+    }
+
+    public function getIsShipped(): ?bool
+    {
+        return $this->isShipped;
+    }
+
+    public function setIsShipped(bool $isShipped): self
+    {
+        $this->isShipped = $isShipped;
+
+        return $this;
+    }
+
+    public function getCustomer(): ?User
+    {
+        return $this->customer;
+    }
+
+    public function setCustomer(?User $customer): self
+    {
+        $this->customer = $customer;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setCreatedAtValue(): void
+    {
+        $this->createdAt = new \DateTime();
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function setUpdatedAtValue(): void
+    {
+        $this->updatedAt = new \DateTime();
     }
 }
