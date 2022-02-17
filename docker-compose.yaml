@@ -3,10 +3,10 @@ services:
     database:
         image: 'mysql:8.0'
         environment:
-            MYSQL_ROOT_PASSWORD: password
-            MYSQL_DATABASE: e-shopper
-            MYSQL_USER: e-shopper
-            MYSQL_PASSWORD: e-shopper
+            - MYSQL_DATABASE=${MYSQL_DATABASE}
+            - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+            - MYSQL_USER=${MYSQL_USER}
+            - MYSQL_PASSWORD=${MYSQL_PASSWORD}
         restart: always
         ports:
             # To allow the host machine to access the ports below, modify the lines below.
