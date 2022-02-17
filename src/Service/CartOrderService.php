@@ -58,7 +58,7 @@ abstract class CartOrderService
     }
 
     /**
-     * @return void
+     * @return int
      */
     public function getOrderTotal()
     {
@@ -73,6 +73,9 @@ abstract class CartOrderService
         return $total;
     }
 
+    /**
+     * @return void
+     */
     public function updateCartContent()
     {
         $productCart = [];
@@ -86,6 +89,9 @@ abstract class CartOrderService
         $this->session->set('product_list', $productCart);
     }
 
+    /**
+     * @return void
+     */
     public function removeOrder()
     {
         $this->entityManager->remove($this->currentOrder);

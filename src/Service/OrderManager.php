@@ -8,7 +8,7 @@ class OrderManager extends CartOrderService
 {
     /**
      * @param Product $product
-     * @param [type]  $form
+     * @param OrderItemFormType  $form
      * @return void
      */
     public function addItemToCurrentOrder($product, $form)
@@ -32,7 +32,7 @@ class OrderManager extends CartOrderService
 
     /**
      * @param Product $product
-     * @return void
+     * @return bool
      */
     public function checkIfOrderContainsProduct(Product $product)
     {
