@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Doctrine\Persistence\ManagerRegistry;
 
 
-class CartOrderService
+abstract class CartOrderService
 {
     /**
      *
