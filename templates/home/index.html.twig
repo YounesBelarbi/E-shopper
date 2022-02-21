@@ -4,241 +4,251 @@
 {% endblock %}
 
 {% block body %}
-	<!-- Carousel -->
-	<div id="top-carousel" class="carousel slide" data-bs-ride="carousel">
-		<ol class="carousel-indicators">
-			<li data-bs-target="#top-carousel" data-bs-slide-to="0" class="active"></li>
-			<li data-bs-target="#top-carousel" data-bs-slide-to="1"></li>
-			<li data-bs-target="#top-carousel" data-bs-slide-to="2"></li>
-		</ol>
-		<div class="carousel-inner">
-			<div class="carousel-item active">
-				<div class="container">
-					<div class="row p-5">
-						<div class="mx-auto col-md-8 col-lg-6 order-lg-last">
-							<img class="img-fluid" src="{{asset( 'https://picsum.photos/200/300?random=' ~ random(1, 100))}}" alt="">
-						</div>
-						<div class="col-lg-6 mb-0 d-flex align-items-center">
-							<div class="text-align-left align-self-center">
-								<h1 class="text-success">
-									<b>Eshopper</b>
-									eCommerce</h1>
-								<h3>Lorem ipsum dolor sit amet consectetur adipisicing elit.</h3>
-								<p>
-									Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptas minima nulla quisquam aliquam magni voluptate modi ratione tenetur nemo debitis!
-								</p>
-							</div>
-						</div>
+<!-- Carousel -->
+<div id="top-carousel" class="carousel slide" data-bs-ride="carousel">
+	<ol class="carousel-indicators">
+		<li data-bs-target="#top-carousel" data-bs-slide-to="0" class="active"></li>
+		<li data-bs-target="#top-carousel" data-bs-slide-to="1"></li>
+		<li data-bs-target="#top-carousel" data-bs-slide-to="2"></li>
+	</ol>
+	<div class="carousel-inner">
+		<div class="carousel-item active">
+			<div class="container">
+				<div class="row p-5">
+					<div class="mx-auto col-md-8 col-lg-6 order-lg-last">
+						<img class="img-fluid" src="{{asset( 'https://picsum.photos/200/300?random=' ~ random(1, 100))}}" alt="">
 					</div>
-				</div>
-			</div>
-			<div class="carousel-item">
-				<div class="container">
-					<div class="row p-5">
-						<div class="mx-auto col-md-8 col-lg-6 order-lg-last">
-							<img class="img-fluid" src="{{asset( 'https://picsum.photos/200/300?random=' ~ random(1, 100))}}" alt="">
-						</div>
-						<div class="col-lg-6 mb-0 d-flex align-items-center">
-							<div class="text-align-left">
-								<h1 class="text-success">Lorem, ipsum.</h1>
-								<h3>Lorem, ipsum dolor.</h3>
-								<p>
-									Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad deleniti aliquid minima exercitationem quidem. Voluptates.
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="carousel-item">
-				<div class="container">
-					<div class="row p-5">
-						<div class="mx-auto col-md-8 col-lg-6 order-lg-last">
-							<img class="img-fluid" src="{{asset( 'https://picsum.photos/200/300?random=' ~ random(1, 100))}}" alt="">
-						</div>
-						<div class="col-lg-6 mb-0 d-flex align-items-center">
-							<div class="text-align-left">
-								<h1 class="text-success">Lorem, ipsum dolor.</h1>
-								<h3>Lorem, ipsum dolor.
-								</h3>
-								<p>
-									Lorem ipsum dolor, sit amet consectetur adipisicing elit. Delectus sed, voluptas dolor impedit ab numquam quasi id inventore eos ipsa autem assumenda odit minus quam?
-								</p>
-							</div>
+					<div class="col-lg-6 mb-0 d-flex align-items-center">
+						<div class="text-align-left align-self-center">
+							<h1 class="text-success">
+								<b>Eshopper</b>
+								eCommerce</h1>
+							<h3>Lorem ipsum dolor sit amet consectetur adipisicing elit.</h3>
+							<p>
+								Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptas minima nulla quisquam aliquam magni voluptate modi ratione tenetur nemo debitis!
+							</p>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<a class="carousel-control-prev text-decoration-none w-auto ps-3" href="#top-carousel" role="button" data-bs-slide="prev">
-			<i class="fas fa-chevron-left"></i>
-		</a>
-		<a class="carousel-control-next text-decoration-none w-auto pe-3" href="#top-carousel" role="button" data-bs-slide="next">
-			<i class="fas fa-chevron-right"></i>
-		</a>
+		<div class="carousel-item">
+			<div class="container">
+				<div class="row p-5">
+					<div class="mx-auto col-md-8 col-lg-6 order-lg-last">
+						<img class="img-fluid" src="{{asset( 'https://picsum.photos/200/300?random=' ~ random(1, 100))}}" alt="">
+					</div>
+					<div class="col-lg-6 mb-0 d-flex align-items-center">
+						<div class="text-align-left">
+							<h1 class="text-success">Lorem, ipsum.</h1>
+							<h3>Lorem, ipsum dolor.</h3>
+							<p>
+								Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad deleniti aliquid minima exercitationem quidem. Voluptates.
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="carousel-item">
+			<div class="container">
+				<div class="row p-5">
+					<div class="mx-auto col-md-8 col-lg-6 order-lg-last">
+						<img class="img-fluid" src="{{asset( 'https://picsum.photos/200/300?random=' ~ random(1, 100))}}" alt="">
+					</div>
+					<div class="col-lg-6 mb-0 d-flex align-items-center">
+						<div class="text-align-left">
+							<h1 class="text-success">Lorem, ipsum dolor.</h1>
+							<h3>Lorem, ipsum dolor.
+							</h3>
+							<p>
+								Lorem ipsum dolor, sit amet consectetur adipisicing elit. Delectus sed, voluptas dolor impedit ab numquam quasi id inventore eos ipsa autem assumenda odit minus quam?
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
-	<!-- Carousel -->
+	<a class="carousel-control-prev text-decoration-none w-auto ps-3" href="#top-carousel" role="button" data-bs-slide="prev">
+		<i class="fas fa-chevron-left"></i>
+	</a>
+	<a class="carousel-control-next text-decoration-none w-auto pe-3" href="#top-carousel" role="button" data-bs-slide="next">
+		<i class="fas fa-chevron-right"></i>
+	</a>
+</div>
+<!-- Carousel -->
 
-	<div class="container py-5">
-		<div
-			class="row">
-			<!-- Sidebar shop -->
-			<section class="sidebar col-lg-3">
-				<h2 class="pb-4">Categories</h2>
-				<ul class="accordion list-unstyled" id="accordionExample">
-					<li class="accordion-item">
-						<h2 class="accordion-header" id="headingOne">
-							<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-								Choix 1
-							</button>
-						</h2>
-						<div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-							<ul class="collapse show list-unstyled pl-3">
-								<li>
-									<a class="text-decoration-none" href="#">Choix 1.1</a>
-								</li>
-								<li>
-									<a class="text-decoration-none" href="#">Choix 1.2</a>
-								</li>
-							</ul>
-						</div>
-					</li>
-					<li class="accordion-item">
-						<h2 class="accordion-header" id="headingTwo">
-							<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-								Choix 2
-							</button>
-						</h2>
-						<div id="collapseTwo" class="accordion-collapse collapse " aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-							<ul class="collapse show list-unstyled pl-3">
-								<li>
-									<a class="text-decoration-none" href="#">Choix 2.1</a>
-								</li>
-								<li>
-									<a class="text-decoration-none" href="#">Choix 2.2</a>
-								</li>
-							</ul>
-						</div>
-					</li>
-					<li class="accordion-item">
-						<h2 class="accordion-header" id="headingThree">
-							<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-								Choix 3
-							</button>
-						</h2>
-						<div id="collapseThree" class="accordion-collapse collapse " aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-							<ul class="collapse show list-unstyled pl-3">
-								<li>
-									<a class="text-decoration-none" href="#">Choix 3.1</a>
-								</li>
-								<li>
-									<a class="text-decoration-none" href="#">Choix 3.2</a>
-								</li>
-							</ul>
-						</div>
-					</li>
-				</ul>
-			</section>
-			<!-- Sidebar shop -->
-
-			<!-- Product shop -->
-			<section class="shop col-lg-9">
-				<div class="row">
-					<div class="col-md-6">
-						<ul class="list-inline shop-top-menu pb-3 pt-1">
-							<li class="list-inline-item">
-								<a class="h3 text-dark text-decoration-none mr-3" href="#">All</a>
+<div class="container py-5">
+	<div
+		class="row">
+		<!-- Sidebar shop -->
+		<section class="sidebar col-lg-3">
+			<h2 class="pb-4">Categories</h2>
+			<ul class="accordion list-unstyled" id="accordionExample">
+				<li class="accordion-item">
+					<h2 class="accordion-header" id="headingOne">
+						<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+							Choix 1
+						</button>
+					</h2>
+					<div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+						<ul class="collapse show list-unstyled pl-3">
+							<li>
+								<a class="text-decoration-none" href="#">Choix 1.1</a>
 							</li>
-							<li class="list-inline-item">
-								<a class="h3 text-dark text-decoration-none mr-3" href="#">Men's</a>
-							</li>
-							<li class="list-inline-item">
-								<a class="h3 text-dark text-decoration-none" href="#">Women's</a>
+							<li>
+								<a class="text-decoration-none" href="#">Choix 1.2</a>
 							</li>
 						</ul>
 					</div>
-					<div class="col-md-6 pb-4">
-						<div class="d-flex">
-							<select class="form-control">
-								<option>Featured</option>
-								<option>A to Z</option>
-								<option>Item</option>
-							</select>
-						</div>
+				</li>
+				<li class="accordion-item">
+					<h2 class="accordion-header" id="headingTwo">
+						<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+							Choix 2
+						</button>
+					</h2>
+					<div id="collapseTwo" class="accordion-collapse collapse " aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+						<ul class="collapse show list-unstyled pl-3">
+							<li>
+								<a class="text-decoration-none" href="#">Choix 2.1</a>
+							</li>
+							<li>
+								<a class="text-decoration-none" href="#">Choix 2.2</a>
+							</li>
+						</ul>
+					</div>
+				</li>
+				<li class="accordion-item">
+					<h2 class="accordion-header" id="headingThree">
+						<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+							Choix 3
+						</button>
+					</h2>
+					<div id="collapseThree" class="accordion-collapse collapse " aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+						<ul class="collapse show list-unstyled pl-3">
+							<li>
+								<a class="text-decoration-none" href="#">Choix 3.1</a>
+							</li>
+							<li>
+								<a class="text-decoration-none" href="#">Choix 3.2</a>
+							</li>
+						</ul>
+					</div>
+				</li>
+			</ul>
+		</section>
+		<!-- Sidebar shop -->
+
+		<!-- Product shop -->
+		<section class="shop col-lg-9" id="products-list">
+			<div class="row">
+				<div class="col-md-6">
+					<ul class="list-inline shop-top-menu pb-3 pt-1">
+						<li class="list-inline-item">
+							<a class="h3 text-dark text-decoration-none mr-3" href="#">All</a>
+						</li>
+						<li class="list-inline-item">
+							<a class="h3 text-dark text-decoration-none mr-3" href="#">Men's</a>
+						</li>
+						<li class="list-inline-item">
+							<a class="h3 text-dark text-decoration-none" href="#">Women's</a>
+						</li>
+					</ul>
+				</div>
+				<div class="col-md-6 pb-4">
+					<div class="d-flex">
+						<select class="form-control">
+							<option>Featured</option>
+							<option>A to Z</option>
+							<option>Item</option>
+						</select>
 					</div>
 				</div>
-				<div class="row">
-					{% for product in products %}
-						<div class="col-md-4">
-							<div class="card mb-4 product-wap rounded-0">
-								<div class="card rounded-0">
-									<img class="card-img rounded-0 img-fluid" src="{{asset( 'https://picsum.photos/200/200?random=' ~ random(1, 100))}}">
-									<div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-end">
-										<ul class="list-unstyled">
-											<li>
-												<a class="btn btn-success text-white" href="shop-single.html">
-													<i class="far fa-heart"></i>
-												</a>
-											</li>
-											<li>
-												<a class="btn btn-success text-white mt-2" href="{{ path('product_details', {id: product.id}) }}">
-													<i class="far fa-eye"></i>
-												</a>
-											</li>
-											<li>
-												<a class="btn btn-success text-white mt-2" href="shop-single.html">
-													<i class="fas fa-cart-plus"></i>
-												</a>
-											</li>
-										</ul>
-									</div>
-								</div>
-								<div class="card-body">
-									<a href="shop-single.html" class="h3 text-decoration-none">{{product.name}}</a>
-									<ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
-										<li>M/L/X/XL</li>
+			</div>
+			<div class="row" >
+				{% for product in products %}
+					<div class="col-md-4">
+						<div class="card mb-4 product-wap rounded-0">
+							<div class="card rounded-0">
+								<img class="card-img rounded-0 img-fluid" src="{{asset( 'https://picsum.photos/200/200?random=' ~ random(1, 100))}}">
+								<div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-end">
+									<ul class="list-unstyled">
+										<li>
+											<a class="btn btn-success text-white" href="shop-single.html">
+												<i class="far fa-heart"></i>
+											</a>
+										</li>
+										<li>
+											<a class="btn btn-success text-white mt-2" href="{{ path('product_details', {id: product.id}) }}">
+												<i class="far fa-eye"></i>
+											</a>
+										</li>
+										<li>
+											<a class="btn btn-success text-white mt-2" href="shop-single.html">
+												<i class="fas fa-cart-plus"></i>
+											</a>
+										</li>
 									</ul>
-
-									{% if product.rating is not null %}
-										<ul class="list-unstyled d-flex justify-content-center mb-1">
-											<li>
-												{% set yellowStart = product.rating %}
-												{% set greyStar = 5-product.rating %}
-
-												{% for i in 1..yellowStart %}
-													<i class="text-warning fa fa-star"></i>
-												{% endfor %}
-
-												{% if greyStar > 0 %}
-													{% for i in 1..greyStar  %}
-														<i class="text-muted fa fa-star"></i>
-													{% endfor %}
-												{% endif %}
-											</li>
-										</ul>
-									{% else %}
-										<span class="new d-flex justify-content-center">nouveauté</span>
-									{% endif %}
-
-									<p class="text-center mb-0">{{product.price}}
-										€</p>
 								</div>
 							</div>
-						</div>
-					{% endfor %}
-				</div>
+							<div class="card-body">
+								<a href="shop-single.html" class="h3 text-decoration-none">{{product.name}}</a>
+								<ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
+									<li>M/L/X/XL</li>
+								</ul>
+								{% if product.rating is not null %}
+									<ul class="list-unstyled d-flex justify-content-center mb-1">
+										<li>
+											{% set yellowStart = product.rating %}
+											{% set greyStar = 5-product.rating %}
 
-				<!-- Pagination -->
-				<div div="row">
-					<ul class="pagination pagination-lg justify-content-center">
-						<li class="page-item disabled">
-							<a class="page-link active rounded-0 mr-3 shadow-sm border-top-0 border-left-0" href="#" tabindex="-1">1</a>
+											{% for i in 1..yellowStart %}
+												<i class="text-warning fa fa-star"></i>
+											{% endfor %}
+
+											{% if greyStar > 0 %}
+												{% for i in 1..greyStar  %}
+													<i class="text-muted fa fa-star"></i>
+												{% endfor %}
+											{% endif %}
+										</li>
+									</ul>
+								{% else %}
+									<span class="new d-flex justify-content-center">nouveauté</span>
+								{% endif %}
+								<p class="text-center mb-0">{{product.price}}
+									€</p>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+
+			<!-- Pagination -->
+			<div div="row">
+				<ul class="pagination justify-content-center">
+					<li class="page-item {{ (currentPage == 1) ? 'disabled' : ''}}">
+						<a class="page-link" href="?page=1#products-list" aria-label="to-first-page">
+							<span aria-hidden="true">&laquo;</span>
+						</a>
+					</li>
+					<li class="page-item  {{ (currentPage == 1) ? 'disabled' : ''}}">
+						<a class="page-link" href="{{ (currentPage > 1) ? '?page=' ~ (currentPage - 1) ~ '#products-list' : '' }}">Précédent</a>
+					</li>
+					{% for item in 1..numberOfPages %}
+						<li class="page-item {{ (currentPage == item) ? 'active' : ''}} ">
+							<a class="page-link" href="?page={{item}}#products-list">{{item}}</a>
 						</li>
-						<li class="page-item">
-							<a class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0 text-dark" href="#">2</a>
+					{% endfor %}
+					<li class="page-item {{ (currentPage == numberOfPages) ? 'disabled' : ''}}">
+						<a class="page-link"href="{{ (currentPage < numberOfPages) ? '?page=' ~ (currentPage + 1) ~ '#products-list' : '' }}">Suivant</a>
 						</li>
-						<li class="page-item">
-							<a class="page-link rounded-0 shadow-sm border-top-0 border-left-0 text-dark" href="#">3</a>
+						<li class="page-item {{ (currentPage == numberOfPages) ? 'disabled' : ''}}">
+							<a class="page-link" href="?page={{numberOfPages}}#products-list" aria-label="to-last-page">
+								<span aria-hidden="true">&raquo;</span>
+							</a>
 						</li>
 					</ul>
 				</div>
@@ -253,8 +263,7 @@
 				<div class="col-lg-6 m-auto">
 					<h2>Categories of The Month</h2>
 					<p>
-						Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																													                    deserunt mollit anim id est laborum.
+						Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																							                    deserunt mollit anim id est laborum.
 					</p>
 				</div>
 			</div>

@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * @method Product|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,32 +20,36 @@ class ProductRepository extends ServiceEntityRepository
         parent::__construct($registry, Product::class);
     }
 
-    // /**
-    //  * @return Product[] Returns an array of Product objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * returns the number of products in the shop database
+     *
+     * @return int
+     */
+    public function getNumberOfProduct()
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $queryBuilder = $this->createQueryBuilder('p')
+            ->select('COUNT(p)');
 
-    /*
-    public function findOneBySomeField($value): ?Product
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return $queryBuilder->getQuery()->getSingleScalarResult();
     }
-    */
+
+    /**
+     * return the product list pagination
+     *
+     * @param int $page
+     * @param int $productPerPage
+     * @return Paginator
+     */
+    public function getProducts($page, $productPerPage)
+    {
+        $firstresult = ($page - 1) * $productPerPage;
+
+        $queryBuilder = $this->createQueryBuilder('p')
+            ->setFirstResult($firstresult)
+            ->setMaxResults($productPerPage);
+
+        $query = $queryBuilder->getQuery();
+        $paginator = new Paginator($query);
+        return $paginator;
+    }
 }
